@@ -1,0 +1,39 @@
+package spring.boot.model.dto;
+
+import java.util.Set;
+import java.util.UUID;
+
+
+public class ManufacturerDto {
+    private UUID Id;
+    private String name;
+    private Set<ProductDto> products;
+
+    public ManufacturerDto() {
+
+    }
+
+    public UUID getId() {
+        return Id;
+    }
+
+    public void setId(UUID id) {
+        Id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<ProductDto> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<ProductDto> products) {
+        this.products = products;
+    }
+}
