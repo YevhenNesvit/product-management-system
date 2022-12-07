@@ -19,8 +19,9 @@ public class ProductDao {
 
     @Id
     @Column(name = "product_id")
-    public String getId() {
-        return id.toString();
+    @GeneratedValue
+    public UUID getId() {
+        return id;
     }
 
     public void setId(UUID id) {
@@ -46,7 +47,7 @@ public class ProductDao {
     }
 
     @ManyToOne
-    @JoinColumn(name = "manufacturer_name")
+    @JoinColumn(name = "manufacturer_id")
     public ManufacturerDao getManufacturer() {
         return manufacturer;
     }

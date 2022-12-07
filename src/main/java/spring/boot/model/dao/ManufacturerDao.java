@@ -17,8 +17,9 @@ public class ManufacturerDao {
 
     @Id
     @Column(name = "manufacturer_id")
-    public String getId() {
-        return id.toString();
+    @GeneratedValue
+    public UUID getId() {
+        return id;
     }
 
     public void setId(UUID id) {
