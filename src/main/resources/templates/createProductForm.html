@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <title>Create project</title>
+        <style>
+            .center {
+                text-align: center;
+                margin-top: 11%;
+            }
+            .but {
+                margin-top: .2%;
+            }
+        </style>
+    </head>
+    <body>
+    <div th:insert="navbar :: navbar">  </div>
+        <form method="post" class="center">
+            <label for="productName"> Please, enter product_name of new product:</label><br>
+            <input type="text" id="productName" name="productName"><br>
+            <label for="price">price of new product:</label><br>
+            <input type="text" id="price" name="price"><br>
+            <label for="companyId">company_id of new project:</label><br>
+            <input type="text" id="companyId" name="companyId"><br>
+            <label for="cost">cost of new project:</label><br>
+            <input type="text" id="cost" name="cost"><br>
+            <label for="creationDate">creation_date of new project:</label><br>
+            <input type="text" id="creationDate" name="creationDate"><br>
+            <button type="submit" class="but">Create</button>
+        </form>
+    </body>
+</html>
