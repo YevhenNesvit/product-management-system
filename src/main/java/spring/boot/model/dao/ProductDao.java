@@ -1,10 +1,13 @@
 package spring.boot.model.dao;
 
 
+import lombok.AllArgsConstructor;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+@AllArgsConstructor
 @Entity(name = "Product")
 @Table(name = "products")
 public class ProductDao {

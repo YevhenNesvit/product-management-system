@@ -1,9 +1,11 @@
 package spring.boot.model.dto;
 
+import lombok.AllArgsConstructor;
+
 import java.util.Set;
 import java.util.UUID;
 
-
+@AllArgsConstructor
 public class ManufacturerDto {
     private UUID Id;
     private String name;

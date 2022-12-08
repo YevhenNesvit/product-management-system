@@ -1,9 +1,12 @@
 package spring.boot.model.dao;
 
+import lombok.AllArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 
+@AllArgsConstructor
 @Entity(name = "Manufacturer")
 @Table(name = "manufacturers")
 public class ManufacturerDao {

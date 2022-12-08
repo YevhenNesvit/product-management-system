@@ -1,8 +1,11 @@
 package spring.boot.model.dto;
 
+import lombok.AllArgsConstructor;
+
 import java.math.BigDecimal;
 import java.util.UUID;
 
+@AllArgsConstructor
 public class ProductDto {
     private UUID Id;
     private String name;
