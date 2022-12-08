@@ -7,6 +7,8 @@ import org.springframework.web.servlet.ModelAndView;
 import spring.boot.model.dao.ManufacturerDao;
 import spring.boot.services.ManufacturerService;
 
+import javax.servlet.http.HttpServletRequest;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/manufacturers")
@@ -27,5 +29,13 @@ public class ManufacturerController {
         manufacturerService.create(manufacturer);
 
         return new ModelAndView("manufacturerCreated");
+    }
+
+    @GetMapping("/getManufacturers")
+    public ModelAndView getManufacturers(HttpServletRequest req) {
+        ModelAndView mav = new ModelAndView("getManufacturers");
+        mav.addObject("manufacturers", manufacturerService.getManufacturers());
+
+        return mav;
     }
 }

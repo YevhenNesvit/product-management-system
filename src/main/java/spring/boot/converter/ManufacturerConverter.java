@@ -1,11 +1,13 @@
 package spring.boot.converter;
 
+import org.springframework.stereotype.Component;
 import spring.boot.model.dao.ManufacturerDao;
 import spring.boot.model.dto.ManufacturerDto;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ManufacturerConverter implements Converter<ManufacturerDto, ManufacturerDao>{
     @Override
     public ManufacturerDto from(ManufacturerDao entity) {
