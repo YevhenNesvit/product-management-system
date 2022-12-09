@@ -20,7 +20,7 @@ public class ManufacturerController {
     @GetMapping("/createManufacturerForm")
     public ModelAndView createManufacturers() {
 
-        return new ModelAndView("createManufacturerForm");
+        return new ModelAndView("manufacturers/createManufacturerForm");
     }
 
     @PostMapping("/manufacturerCreated")
@@ -28,18 +28,18 @@ public class ManufacturerController {
     ) {
         if (checkManufacturers.IsManufacturerNameExists(manufacturerName)) {
 
-            return new ModelAndView("manufacturerNameAlreadyExists");
+            return new ModelAndView("manufacturers/manufacturerNameAlreadyExists");
         }
 
         manufacturer.setName(manufacturerName);
         manufacturerService.create(manufacturer);
 
-        return new ModelAndView("manufacturerCreated");
+        return new ModelAndView("manufacturers/manufacturerCreated");
     }
 
     @GetMapping("/getManufacturers")
     public ModelAndView getManufacturers() {
-        ModelAndView mav = new ModelAndView("getManufacturers");
+        ModelAndView mav = new ModelAndView("manufacturers/getManufacturers");
         mav.addObject("manufacturers", manufacturerService.getManufacturers());
 
         return mav;
@@ -48,7 +48,7 @@ public class ManufacturerController {
     @GetMapping("/deleteManufacturerForm")
     public ModelAndView deleteManufacturers() {
 
-        return new ModelAndView("deleteManufacturerForm");
+        return new ModelAndView("manufacturers/deleteManufacturerForm");
     }
 
     @PostMapping("/manufacturerDeleted")
@@ -57,9 +57,9 @@ public class ManufacturerController {
         if (checkManufacturers.IsManufacturerNameExists(manufacturerName)) {
             manufacturerService.deleteByName(manufacturerName);
 
-            return new ModelAndView("manufacturerDeleted");
+            return new ModelAndView("manufacturers/manufacturerDeleted");
         }
 
-        return new ModelAndView("manufacturerNameNotExists");
+        return new ModelAndView("manufacturers/manufacturerNameNotExists");
     }
 }
