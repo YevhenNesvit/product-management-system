@@ -25,4 +25,7 @@ public class ManufacturerService {
         return converter.fromList(repository.findAll());
     }
 
+    public void deleteByName(String name) {
+        repository.deleteByName(name);
+    }
 }

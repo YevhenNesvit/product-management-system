@@ -4,8 +4,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <META http-equiv="refresh" content="4; URL=/manufacturers/getManufacturers">
-        <title>Manufacturer created</title>
+        <title>Manufacturer name does not exist</title>
         <style>
            .center {
             text-align: center;
@@ -14,9 +13,14 @@
           </style>
     </head>
     <body>
-        <div th:insert="navbar :: navbar">  </div>
+    <div th:insert="navbar :: navbar">  </div>
         <div class="center">
-          <h2><b>Manufacturer successfully created!</b></h2>
+          <h2><b>manufacturer_name does not exist. Please, retry</b></h2>
+          <p><a href="/manufacturers/deleteManufacturerForm">Delete manufacturer</a></p>
+<!--          <p><a href="/getProjectByIdForm">Get project by id</a></p>-->
+<!--          <p><a href="/updateProjectForm">Update project</a></p>-->
+<!--          <p><a href="/getDevelopersByProjectForm">Get developers by project</a></p>-->
+<!--          <p><a href="/getSalaryByProjectForm">Get salary by project</a></p>-->
         </div>
     </body>
 </html>
