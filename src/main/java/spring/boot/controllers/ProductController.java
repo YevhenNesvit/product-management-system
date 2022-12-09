@@ -8,10 +8,9 @@ import spring.boot.model.dao.ManufacturerDao;
 import spring.boot.model.dao.ProductDao;
 import spring.boot.services.ManufacturerService;
 import spring.boot.services.ProductService;
-import spring.boot.utils.GetManufacturerNameById;
+import spring.boot.utils.GetManufacturerIdByName;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @AllArgsConstructor
 @RestController
@@ -22,7 +21,7 @@ public class ProductController {
     @Autowired
     ManufacturerService manufacturerService;
     @Autowired
-    GetManufacturerNameById manufacturerNameById;
+    GetManufacturerIdByName manufacturerId;
 
     @GetMapping("/createProductForm")
     public ModelAndView createProductForm() {
@@ -32,9 +31,9 @@ public class ProductController {
 
     @PostMapping("/productCreated")
     public ModelAndView createProduct(@ModelAttribute("productName") String productName, @ModelAttribute("price") BigDecimal price,
-            @ModelAttribute("manufacturerId") UUID manufacturerId, ProductDao product, ManufacturerDao manufacturer) {
-        manufacturer.setId(manufacturerId);
-        manufacturer.setName(manufacturerNameById.getManufacturerNameById(manufacturerId));
+            @ModelAttribute("manufacturerName") String manufacturerName, ProductDao product, ManufacturerDao manufacturer) {
+        manufacturer.setId(manufacturerId.getManufacturerIdByName(manufacturerName));
+        manufacturer.setName(manufacturerName);
 
         product.setName(productName);
         product.setPrice(price);

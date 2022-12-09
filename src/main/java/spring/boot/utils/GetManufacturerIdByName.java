@@ -9,18 +9,18 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
-public class GetManufacturerNameById {
+public class GetManufacturerIdByName {
     @Autowired
     ManufacturerService manufacturerService;
 
-    public String getManufacturerNameById(UUID id) {
+    public UUID getManufacturerIdByName(String name) {
         List<ManufacturerDto> manufacturers = manufacturerService.getManufacturers();
-        String name = "";
+        UUID id = null;
         for (ManufacturerDto manufacturer : manufacturers) {
-            if (manufacturer.getId().equals(id)) {
-                name = manufacturer.getName();
+            if (manufacturer.getName().equals(name)) {
+                id = manufacturer.getId();
             }
         }
-        return name;
+        return id;
     }
 }
