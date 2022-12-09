@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import spring.boot.model.dao.ManufacturerDao;
 import spring.boot.services.ManufacturerService;
+import spring.boot.utils.CheckManufacturers;
 
 @AllArgsConstructor
 @RestController
@@ -13,6 +14,8 @@ import spring.boot.services.ManufacturerService;
 public class ManufacturerController {
     @Autowired
     ManufacturerService manufacturerService;
+    @Autowired
+    CheckManufacturers checkManufacturers;
 
     @GetMapping("/createManufacturerForm")
     public ModelAndView createManufacturerForm() {
@@ -23,7 +26,11 @@ public class ManufacturerController {
     @PostMapping("/manufacturerCreated")
     public ModelAndView addNewProduct(@ModelAttribute("manufacturerName") String manufacturerName, ManufacturerDao manufacturer
     ) {
+
         manufacturer.setName(manufacturerName);
+        if (checkManufacturers.IsManufacturerNameExists(manufacturer.getName())) {
+            return new ModelAndView("manufacturerNameAlreadyExists");
+        }
         manufacturerService.create(manufacturer);
 
         return new ModelAndView("manufacturerCreated");
