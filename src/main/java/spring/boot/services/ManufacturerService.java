@@ -28,4 +28,8 @@ public class ManufacturerService {
     public void deleteByName(String name) {
         repository.deleteByName(name);
     }
+
+    public void updateByName(String newName, String oldName) {
+        repository.updateByName(newName, oldName);
+    }
 }

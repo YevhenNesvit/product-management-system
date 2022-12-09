@@ -18,13 +18,13 @@ public class ManufacturerController {
     CheckManufacturers checkManufacturers;
 
     @GetMapping("/createManufacturerForm")
-    public ModelAndView createManufacturers() {
+    public ModelAndView createManufacturerForm() {
 
         return new ModelAndView("manufacturers/createManufacturerForm");
     }
 
     @PostMapping("/manufacturerCreated")
-    public ModelAndView addNewManufacturer(@ModelAttribute("manufacturerName") String manufacturerName, ManufacturerDao manufacturer
+    public ModelAndView createManufacturer(@ModelAttribute("manufacturerName") String manufacturerName, ManufacturerDao manufacturer
     ) {
         if (checkManufacturers.IsManufacturerNameExists(manufacturerName)) {
 
@@ -46,7 +46,7 @@ public class ManufacturerController {
     }
 
     @GetMapping("/deleteManufacturerForm")
-    public ModelAndView deleteManufacturers() {
+    public ModelAndView deleteManufacturerForm() {
 
         return new ModelAndView("manufacturers/deleteManufacturerForm");
     }
@@ -58,6 +58,24 @@ public class ManufacturerController {
             manufacturerService.deleteByName(manufacturerName);
 
             return new ModelAndView("manufacturers/manufacturerDeleted");
+        }
+
+        return new ModelAndView("manufacturers/manufacturerNameNotExists");
+    }
+
+    @GetMapping("/updateManufacturerForm")
+    public ModelAndView updateManufacturerForm() {
+
+        return new ModelAndView("manufacturers/updateManufacturerForm");
+    }
+
+    @PostMapping("/manufacturerUpdated")
+    public ModelAndView updateManufacturer(@ModelAttribute("newName") String newName, @ModelAttribute("oldName") String oldName) {
+
+        if (checkManufacturers.IsManufacturerNameExists(oldName)) {
+            manufacturerService.updateByName(newName, oldName);
+
+            return new ModelAndView("manufacturers/manufacturerUpdated");
         }
 
         return new ModelAndView("manufacturers/manufacturerNameNotExists");
