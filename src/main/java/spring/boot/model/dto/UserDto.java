@@ -1,9 +1,7 @@
 package spring.boot.model.dto;
 
 import lombok.AllArgsConstructor;
-import spring.boot.model.dao.RoleDao;
 
-import java.util.Set;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -13,7 +11,7 @@ public class UserDto {
     private String password;
     private String firstName;
     private String lastName;
-    private Set<RoleDao> roles;
+    private RoleDto role;
 
     public UserDto() {
 
@@ -59,12 +57,12 @@ public class UserDto {
         this.lastName = lastName;
     }
 
-    public Set<RoleDao> getRoles() {
-        return roles;
+    public RoleDto getRole() {
+        return role;
     }
 
-    public void setRoles(Set<RoleDao> roles) {
-        this.roles = roles;
+    public void setRole(RoleDto role) {
+        this.role = role;
     }
 }
 
