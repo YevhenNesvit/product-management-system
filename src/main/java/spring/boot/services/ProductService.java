@@ -26,4 +26,8 @@ public class ProductService {
     public List<ProductDto> getProducts() {
         return converter.fromList(repository.findAll());
     }
+
+    public void deleteByName(String name) {
+        repository.deleteByName(name);
+    }
 }

@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import spring.boot.model.dao.ManufacturerDao;
 import spring.boot.model.dao.ProductDao;
-import spring.boot.services.ManufacturerService;
 import spring.boot.services.ProductService;
+import spring.boot.utils.CheckProducts;
 import spring.boot.utils.GetManufacturerIdByName;
 
 import java.math.BigDecimal;
@@ -19,7 +19,7 @@ public class ProductController {
     @Autowired
     ProductService productService;
     @Autowired
-    ManufacturerService manufacturerService;
+    CheckProducts checkProducts;
     @Autowired
     GetManufacturerIdByName manufacturerId;
 
@@ -49,5 +49,23 @@ public class ProductController {
         mav.addObject("products", productService.getProducts());
 
         return mav;
+    }
+
+    @GetMapping("/deleteProductForm")
+    public ModelAndView deleteProductForm() {
+
+        return new ModelAndView("products/deleteProductForm");
+    }
+
+    @PostMapping("/productDeleted")
+    public ModelAndView deleteManufacturer(@ModelAttribute("productName") String productName) {
+
+        if (checkProducts.IsProductNameExists(productName)) {
+            productService.deleteByName(productName);
+
+            return new ModelAndView("products/productDeleted");
+        }
+
+        return new ModelAndView("products/productNameNotExists");
     }
 }
