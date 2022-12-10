@@ -1,4 +1,4 @@
-create table roles
+create table if not exists roles
 (
 	role_id UUID PRIMARY KEY,
     role_name VARCHAR(200) NOT NULL
@@ -6,12 +6,15 @@ create table roles
 
 alter table roles owner to postgres;
 
-create table users
+create table if not exists users
 (
 	user_id UUID PRIMARY KEY,
     email VARCHAR(200) NOT NULL,
     first_name VARCHAR(200) NOT NULL,
-    last_name VARCHAR(200)
+    last_name VARCHAR(200),
+    role_id UUID,
+        FOREIGN KEY (role_id)
+            REFERENCES roles
 );
 
 alter table roles owner to postgres;

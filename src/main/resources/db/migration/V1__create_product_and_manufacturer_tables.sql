@@ -1,4 +1,4 @@
-create table manufacturers
+create table if not exists manufacturers
 (
 	manufacturer_id UUID PRIMARY KEY,
     manufacturer_name VARCHAR(200) NOT NULL UNIQUE
@@ -6,7 +6,7 @@ create table manufacturers
 
 alter table manufacturers owner to postgres;
 
-create table products
+create table if not exists products
 (
 	product_id UUID PRIMARY KEY,
 	product_name VARCHAR(200) NOT NULL,

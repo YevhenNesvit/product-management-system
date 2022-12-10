@@ -1,6 +1,5 @@
 package spring.boot.model.dao;
 
-import java.util.Set;
 import java.util.UUID;
 
 public class UserDao {
@@ -9,5 +8,5 @@ public class UserDao {
     private String password;
     private String firstName;
     private String lastName;
-    private Set<RoleDao> roles;
+    private RoleDao role;
 }
