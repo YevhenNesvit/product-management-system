@@ -36,6 +36,11 @@ public class ProductController {
     public ModelAndView createProduct(@ModelAttribute("productName") String productName, @ModelAttribute("price") BigDecimal price,
                                       @ModelAttribute("manufacturerName") String manufacturerName, ProductDao product,
                                       ManufacturerDao manufacturer) {
+
+        if (checkProducts.IsProductNameExists(productName)) {
+
+            return new ModelAndView("products/productNameAlreadyExists");
+        }
         manufacturer.setId(manufacturerId.getManufacturerIdByName(manufacturerName));
         manufacturer.setName(manufacturerName);
 
