@@ -23,7 +23,10 @@
             <label for="price">price of new product:</label><br>
             <input type="text" id="price" name="price"><br>
             <label for="manufacturerName">manufacturer_name of new product:</label><br>
-            <input type="text" id="manufacturerName" name="manufacturerName"><br>
+            <input type="search" list="myList" id="manufacturerName" name="manufacturerName"><br>
+            <datalist id="myList">
+                <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer.name}" th:text="${manufacturer.name}"></option>
+            </datalist>
             <button type="submit" class="but">Create</button>
         </form>
     </body>

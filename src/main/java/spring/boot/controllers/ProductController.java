@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import spring.boot.model.dao.ManufacturerDao;
 import spring.boot.model.dao.ProductDao;
+import spring.boot.services.ManufacturerService;
 import spring.boot.services.ProductService;
 import spring.boot.utils.CheckManufacturers;
 import spring.boot.utils.CheckProducts;
@@ -25,11 +26,15 @@ public class ProductController {
     GetManufacturerIdByName manufacturerId;
     @Autowired
     CheckManufacturers checkManufacturers;
+    @Autowired
+    ManufacturerService manufacturerService;
 
     @GetMapping("/createProductForm")
     public ModelAndView createProductForm() {
+        ModelAndView mav = new ModelAndView("products/createProductForm");
+        mav.addObject("manufacturers", manufacturerService.getManufacturers());
 
-        return new ModelAndView("products/createProductForm");
+        return mav;
     }
 
     @PostMapping("/productCreated")
