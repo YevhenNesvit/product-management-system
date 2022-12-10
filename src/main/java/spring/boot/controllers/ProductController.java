@@ -42,4 +42,12 @@ public class ProductController {
 
         return new ModelAndView("products/productCreated");
     }
+
+    @GetMapping("/getProducts")
+    public ModelAndView getManufacturers() {
+        ModelAndView mav = new ModelAndView("products/getProducts");
+        mav.addObject("products", productService.getProducts());
+
+        return mav;
+    }
 }

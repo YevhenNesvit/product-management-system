@@ -1,11 +1,13 @@
 package spring.boot.converter;
 
+import org.springframework.stereotype.Component;
 import spring.boot.model.dao.ProductDao;
 import spring.boot.model.dto.ProductDto;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ProductConverter implements Converter<ProductDto, ProductDao> {
     @Override
     public ProductDto from(ProductDao entity) {

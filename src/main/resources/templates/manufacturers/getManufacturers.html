@@ -27,7 +27,7 @@
         <div class ="center">
           <h2>Manufacturers</h2>
             <table border="2">
-              <tr><th>manufacturer_id</th><th>name</th></tr>
+              <tr><th>manufacturer_id</th><th>manufacturer_name</th></tr>
                 <tr th:each="manufacturer: ${manufacturers}">
                   <td th:text="${manufacturer.id}"></td>
                   <td th:text="${manufacturer.name}"></td>
