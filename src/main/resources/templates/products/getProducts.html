@@ -27,12 +27,12 @@
 <div class ="center">
     <h2>Products</h2>
     <table border="2">
-        <tr><th>product_id</th><th>product_name</th><th>price</th><th>manufacturer_id</th></tr>
+        <tr><th>product_id</th><th>product_name</th><th>price</th><th>manufacturer</th></tr>
         <tr th:each="product: ${products}">
             <td th:text="${product.id}"></td>
             <td th:text="${product.name}"></td>
             <td th:text="${product.price}"></td>
-            <td th:text="${product.manufacturer.id}"></td>
+            <td th:text="${product.manufacturer.name}"></td>
         </tr>
     </table>
 </div>

@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 import spring.boot.model.dao.ManufacturerDao;
 import spring.boot.model.dao.ProductDao;
 import spring.boot.services.ProductService;
+import spring.boot.utils.CheckManufacturers;
 import spring.boot.utils.CheckProducts;
 import spring.boot.utils.GetManufacturerIdByName;
 
@@ -22,6 +23,8 @@ public class ProductController {
     CheckProducts checkProducts;
     @Autowired
     GetManufacturerIdByName manufacturerId;
+    @Autowired
+    CheckManufacturers checkManufacturers;
 
     @GetMapping("/createProductForm")
     public ModelAndView createProductForm() {
@@ -31,7 +34,8 @@ public class ProductController {
 
     @PostMapping("/productCreated")
     public ModelAndView createProduct(@ModelAttribute("productName") String productName, @ModelAttribute("price") BigDecimal price,
-            @ModelAttribute("manufacturerName") String manufacturerName, ProductDao product, ManufacturerDao manufacturer) {
+                                      @ModelAttribute("manufacturerName") String manufacturerName, ProductDao product,
+                                      ManufacturerDao manufacturer) {
         manufacturer.setId(manufacturerId.getManufacturerIdByName(manufacturerName));
         manufacturer.setName(manufacturerName);
 
@@ -67,5 +71,32 @@ public class ProductController {
         }
 
         return new ModelAndView("products/productNameNotExists");
+    }
+
+    @GetMapping("/updateProductForm")
+    public ModelAndView updateProductForm() {
+
+        return new ModelAndView("products/updateProductForm");
+    }
+
+    @PostMapping("/productUpdated")
+    public ModelAndView updateProduct(@ModelAttribute("newName") String newName, @ModelAttribute("newPrice") BigDecimal newPrice,
+                                      @ModelAttribute("manufacturerName") String manufacturerName,
+                                      @ModelAttribute("oldName") String oldName, ManufacturerDao manufacturer) {
+        if (checkProducts.IsProductNameExists(oldName)) {
+            if (checkManufacturers.IsManufacturerNameExists(manufacturerName)) {
+                manufacturer.setId(manufacturerId.getManufacturerIdByName(manufacturerName));
+                manufacturer.setName(manufacturerName);
+                productService.updateByName(newName, newPrice, manufacturer, oldName);
+
+                return new ModelAndView("products/productUpdated");
+            } else {
+
+                return new ModelAndView("manufacturers/manufacturerNameNotExists");
+            }
+        } else {
+
+            return new ModelAndView("products/productNameNotExists");
+        }
     }
 }

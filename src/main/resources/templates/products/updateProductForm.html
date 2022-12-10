@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Update product</title>
+    <style>
+            .center {
+                text-align: center;
+                margin-top: 11%;
+            }
+            .but {
+                margin-top: .2%;
+            }
+        </style>
+</head>
+<body>
+<div th:insert="navbar :: navbar">  </div>
+<form method="post" class="center" th:action="@{/products/productUpdated}">
+    <label for="newName">Please, enter new product_name:</label><br>
+    <input type="text" id="newName" name="newName"><br>
+    <label for="newPrice">Please, enter new price:</label><br>
+    <input type="text" id="newPrice" name="newPrice"><br>
+    <label for="manufacturerName">Please, enter name of new manufacturer:</label><br>
+    <input type="text" id="manufacturerName" name="manufacturerName"><br>
+    <label for="oldName">old product_name to update:</label><br>
+    <input type="text" id="oldName" name="oldName"><br>
+    <button type="submit" class="but">Update</button>
+</form>
+</body>
+</html>
