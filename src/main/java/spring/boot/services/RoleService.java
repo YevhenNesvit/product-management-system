@@ -25,4 +25,8 @@ public class RoleService {
     public List<RoleDto> getRoles() {
         return converter.fromList(repository.findAll());
     }
+
+    public void deleteByName(String name) {
+        repository.deleteByName(name);
+    }
 }

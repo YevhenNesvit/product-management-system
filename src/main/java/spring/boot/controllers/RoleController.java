@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import spring.boot.model.dao.ManufacturerDao;
 import spring.boot.model.dao.RoleDao;
 import spring.boot.services.RoleService;
 import spring.boot.utils.CheckRoles;
@@ -43,5 +42,23 @@ public class RoleController {
         mav.addObject("roles", roleService.getRoles());
 
         return mav;
+    }
+
+    @GetMapping("/deleteRoleForm")
+    public ModelAndView deleteRoleForm() {
+
+        return new ModelAndView("roles/deleteRoleForm");
+    }
+
+    @PostMapping("/roleDeleted")
+    public ModelAndView deleteRole(@ModelAttribute("roleName") String roleName) {
+
+        if (checkRoles.IsRoleNameExists(roleName)) {
+            roleService.deleteByName(roleName);
+
+            return new ModelAndView("roles/roleDeleted");
+        }
+
+        return new ModelAndView("roles/roleNameNotExists");
     }
 }
