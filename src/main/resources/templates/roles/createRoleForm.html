@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Create role</title>
+    <style>
+            .center {
+                text-align: center;
+                margin-top: 11%;
+            }
+            .but {
+                margin-top: .2%;
+            }
+        </style>
+</head>
+<body>
+<div th:insert="navbar :: navbar">  </div>
+<form method="post" class="center" th:action="@{/roles/roleCreated}">
+    <label for="roleName"> Please, enter role_name of new role:</label><br>
+    <input type="text" id="roleName" name="roleName"><br>
+    <button type="submit" class="but">Create</button>
+</form>
+</body>
+</html>

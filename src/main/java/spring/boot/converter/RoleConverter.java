@@ -1,11 +1,13 @@
 package spring.boot.converter;
 
+import org.springframework.stereotype.Component;
 import spring.boot.model.dao.RoleDao;
 import spring.boot.model.dto.RoleDto;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class RoleConverter implements Converter<RoleDto, RoleDao> {
     @Override
     public RoleDto from(RoleDao entity) {
