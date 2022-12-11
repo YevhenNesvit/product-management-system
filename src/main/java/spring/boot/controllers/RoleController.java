@@ -61,4 +61,22 @@ public class RoleController {
 
         return new ModelAndView("roles/roleNameNotExists");
     }
+
+    @GetMapping("/updateRoleForm")
+    public ModelAndView updateRoleForm() {
+
+        return new ModelAndView("roles/updateRoleForm");
+    }
+
+    @PostMapping("/roleUpdated")
+    public ModelAndView updateRole(@ModelAttribute("newName") String newName, @ModelAttribute("oldName") String oldName) {
+
+        if (checkRoles.IsRoleNameExists(oldName)) {
+            roleService.updateByName(newName, oldName);
+
+            return new ModelAndView("roles/roleUpdated");
+        }
+
+        return new ModelAndView("roles/roleNameNotExists");
+    }
 }
