@@ -84,4 +84,32 @@ public class UserController {
 
         return new ModelAndView("users/userEmailNotExists");
     }
+
+    @GetMapping("/updateUserForm")
+    public ModelAndView updateUserForm() {
+
+        return new ModelAndView("users/updateUserForm");
+    }
+
+    @PostMapping("/userUpdated")
+    public ModelAndView updateProduct(@ModelAttribute("newEmail") String newEmail, @ModelAttribute("password") String password,
+                                      @ModelAttribute("firstName") String firstName, @ModelAttribute("lastName") String lastName,
+                                      @ModelAttribute("roleName") String roleName, @ModelAttribute("oldEmail") String oldEmail,
+                                      RoleDao role) {
+        if (checkUsers.IsUserEmailExists(oldEmail)) {
+            if (checkRoles.IsRoleNameExists(roleName)) {
+                role.setId(roleId.getRoleIdByName(roleName));
+                role.setName(roleName);
+                userService.updateByEmail(newEmail, password, firstName, lastName, role, oldEmail);
+
+                return new ModelAndView("users/userUpdated");
+            } else {
+
+                return new ModelAndView("roles/roleNameNotExists");
+            }
+        } else {
+
+            return new ModelAndView("users/userEmailNotExists");
+        }
+    }
 }

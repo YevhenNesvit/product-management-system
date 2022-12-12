@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring.boot.converter.UserConverter;
+import spring.boot.model.dao.RoleDao;
 import spring.boot.model.dao.UserDao;
 import spring.boot.model.dto.UserDto;
 import spring.boot.repositories.UserRepository;
@@ -28,5 +29,10 @@ public class UserService {
 
     public void deleteByEmail(String email) {
         repository.deleteByEmail(email);
+    }
+
+    public void updateByEmail(String newEmail, String password, String first_name, String lastName, RoleDao role,
+                              String oldEmail) {
+        repository.updateByEmail(newEmail, password, first_name, lastName, role, oldEmail);
     }
 }

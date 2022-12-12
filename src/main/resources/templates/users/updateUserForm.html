@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Update user</title>
+    <style>
+            .center {
+                text-align: center;
+                margin-top: 11%;
+            }
+            .but {
+                margin-top: .2%;
+            }
+        </style>
+</head>
+<body>
+<div th:insert="navbar :: navbar">  </div>
+<form method="post" class="center" th:action="@{/users/userUpdated}">
+    <label for="newEmail">Please, enter new email:</label><br>
+    <input type="text" id="newEmail" name="newEmail"><br>
+    <label for="password">Please, enter new password:</label><br>
+    <input type="text" id="password" name="password"><br>
+    <label for="firstName">Please, enter new first_name:</label><br>
+    <input type="text" id="firstName" name="firstName"><br>
+    <label for="lastName">Please, enter new last_name:</label><br>
+    <input type="text" id="lastName" name="lastName"><br>
+    <label for="roleName">Please, enter new role:</label><br>
+    <input type="text" id="roleName" name="roleName"><br>
+    <label for="oldEmail">Please, enter old email of user to update:</label><br>
+    <input type="text" id="oldEmail" name="oldEmail"><br>
+    <button type="submit" class="but">Update</button>
+</form>
+</body>
+</html>
