@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 import spring.boot.model.dao.RoleDao;
 import spring.boot.model.dao.UserDao;
 import spring.boot.services.UserService;
+import spring.boot.utils.CheckRoles;
 import spring.boot.utils.CheckUsers;
 import spring.boot.utils.GetRoleIdByName;
 
@@ -20,6 +21,8 @@ public class UserController {
     private final CheckUsers checkUsers;
     @Autowired
     private final GetRoleIdByName roleId;
+    @Autowired
+    private final CheckRoles checkRoles;
 
     @GetMapping("/createUserForm")
     public ModelAndView createUserForm() {
@@ -37,19 +40,23 @@ public class UserController {
         if (checkUsers.IsUserEmailExists(email)) {
 
             return new ModelAndView("users/userEmailAlreadyExists");
+        } else if (checkRoles.IsRoleNameExists(roleName)) {
+            role.setId(roleId.getRoleIdByName(roleName));
+            role.setName(roleName);
+
+            user.setEmail(email);
+            user.setPassword(password);
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setRole(role);
+
+            userService.create(user);
+
+            return new ModelAndView("users/userCreated");
+        } else {
+
+            return new ModelAndView("roles/roleNameNotExists");
         }
-        role.setId(roleId.getRoleIdByName(roleName));
-        role.setName(roleName);
-
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setRole(role);
-
-        userService.create(user);
-
-        return new ModelAndView("users/userCreated");
     }
 
     @GetMapping("/getUsers")
