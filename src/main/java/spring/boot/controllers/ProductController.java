@@ -45,16 +45,20 @@ public class ProductController {
         if (checkProducts.IsProductNameExists(productName)) {
 
             return new ModelAndView("products/productNameAlreadyExists");
+        } else if (checkManufacturers.IsManufacturerNameExists(manufacturerName)) {
+            manufacturer.setId(manufacturerId.getManufacturerIdByName(manufacturerName));
+            manufacturer.setName(manufacturerName);
+
+            product.setName(productName);
+            product.setPrice(price);
+            product.setManufacturer(manufacturer);
+            productService.create(product);
+
+            return new ModelAndView("products/productCreated");
+        } else {
+
+            return new ModelAndView("manufacturers/manufacturerNameNotExists");
         }
-        manufacturer.setId(manufacturerId.getManufacturerIdByName(manufacturerName));
-        manufacturer.setName(manufacturerName);
-
-        product.setName(productName);
-        product.setPrice(price);
-        product.setManufacturer(manufacturer);
-        productService.create(product);
-
-        return new ModelAndView("products/productCreated");
     }
 
     @GetMapping("/getProducts")
