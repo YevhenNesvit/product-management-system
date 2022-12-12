@@ -67,4 +67,21 @@ public class UserController {
         return mav;
     }
 
+    @GetMapping("/deleteUserForm")
+    public ModelAndView deleteUserForm() {
+
+        return new ModelAndView("users/deleteUserForm");
+    }
+
+    @PostMapping("/userDeleted")
+    public ModelAndView deleteUser(@ModelAttribute("email") String email) {
+
+        if (checkUsers.IsUserEmailExists(email)) {
+            userService.deleteByEmail(email);
+
+            return new ModelAndView("users/userDeleted");
+        }
+
+        return new ModelAndView("users/userEmailNotExists");
+    }
 }

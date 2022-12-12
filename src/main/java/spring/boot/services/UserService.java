@@ -25,4 +25,8 @@ public class UserService {
     public List<UserDto> getUsers() {
         return converter.fromList(repository.findAll());
     }
+
+    public void deleteByEmail(String email) {
+        repository.deleteByEmail(email);
+    }
 }
