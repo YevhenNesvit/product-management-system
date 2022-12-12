@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Create user</title>
+    <style>
+            .center {
+                text-align: center;
+                margin-top: 11%;
+            }
+            .but {
+                margin-top: .2%;
+            }
+        </style>
+</head>
+<body>
+<div th:insert="navbar :: navbar">  </div>
+<form method="post" class="center" th:action="@{/users/userCreated}">
+    <label for="productName"> Please, enter product_name of new product:</label><br>
+    <input type="text" id="productName" name="productName"><br>
+    <label for="price">price of new product:</label><br>
+    <input type="text" id="price" name="price"><br>
+    <label for="manufacturerName">manufacturer_name of new product:</label><br>
+    <input type="search" list="myList" id="manufacturerName" name="manufacturerName"><br>
+    <datalist id="myList">
+        <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer.name}" th:text="${manufacturer.name}"></option>
+    </datalist>
+    <button type="submit" class="but">Create</button>
+</form>
+</body>
+</html>
