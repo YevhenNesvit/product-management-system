@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import spring.boot.model.dao.ManufacturerDao;
-import spring.boot.model.dao.ProductDao;
+import spring.boot.model.dao.RoleDao;
+import spring.boot.model.dao.UserDao;
 import spring.boot.services.UserService;
+import spring.boot.utils.CheckUsers;
+import spring.boot.utils.GetRoleIdByName;
 
 @AllArgsConstructor
 @RestController
@@ -14,6 +16,10 @@ import spring.boot.services.UserService;
 public class UserController {
     @Autowired
     private final UserService userService;
+    @Autowired
+    private final CheckUsers checkUsers;
+    @Autowired
+    private final GetRoleIdByName roleId;
 
     @GetMapping("/createUserForm")
     public ModelAndView createUserForm() {
@@ -24,23 +30,26 @@ public class UserController {
     }
 
     @PostMapping("/userCreated")
-    public ModelAndView createUser(@ModelAttribute("userEmail") String userEmail, @ModelAttribute("password") String password,
-                                      @ModelAttribute("userFirstName") String userFirstName, ProductDao product,
-                                      ManufacturerDao manufacturer) {
+    public ModelAndView createUser(@ModelAttribute("email") String email, @ModelAttribute("password") String password,
+                                   @ModelAttribute("firstName") String firstName, @ModelAttribute("lastName") String lastName,
+                                   @ModelAttribute("roleName") String roleName, UserDao user, RoleDao role) {
 
-        if (checkProducts.IsProductNameExists(productName)) {
+        if (checkUsers.IsUserEmailExists(email)) {
 
-            return new ModelAndView("products/productNameAlreadyExists");
+            return new ModelAndView("users/userEmailAlreadyExists");
         }
-        manufacturer.setId(manufacturerId.getManufacturerIdByName(manufacturerName));
-        manufacturer.setName(manufacturerName);
+        role.setId(roleId.getRoleIdByName(roleName));
+        role.setName(roleName);
 
-        product.setName(productName);
-        product.setPrice(price);
-        product.setManufacturer(manufacturer);
-        productService.create(product);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setRole(role);
 
-        return new ModelAndView("products/productCreated");
+        userService.create(user);
+
+        return new ModelAndView("users/userCreated");
     }
 
     @GetMapping("/getUsers")

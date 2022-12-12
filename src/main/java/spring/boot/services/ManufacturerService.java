@@ -1,6 +1,6 @@
 package spring.boot.services;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring.boot.converter.ManufacturerConverter;
@@ -10,7 +10,7 @@ import spring.boot.repositories.ManufacturerRepository;
 
 import java.util.List;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Service
 public class ManufacturerService {
     @Autowired

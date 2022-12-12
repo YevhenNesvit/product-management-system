@@ -1,11 +1,13 @@
 package spring.boot.converter;
 
+import org.springframework.stereotype.Component;
 import spring.boot.model.dao.UserDao;
 import spring.boot.model.dto.UserDto;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class UserConverter implements Converter<UserDto, UserDao> {
     @Override
     public UserDto from(UserDao entity) {

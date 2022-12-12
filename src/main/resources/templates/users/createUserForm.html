@@ -18,15 +18,16 @@
 <body>
 <div th:insert="navbar :: navbar">  </div>
 <form method="post" class="center" th:action="@{/users/userCreated}">
-    <label for="productName"> Please, enter product_name of new product:</label><br>
-    <input type="text" id="productName" name="productName"><br>
-    <label for="price">price of new product:</label><br>
-    <input type="text" id="price" name="price"><br>
-    <label for="manufacturerName">manufacturer_name of new product:</label><br>
-    <input type="search" list="myList" id="manufacturerName" name="manufacturerName"><br>
-    <datalist id="myList">
-        <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer.name}" th:text="${manufacturer.name}"></option>
-    </datalist>
+    <label for="email"> Please, enter email of new user:</label><br>
+    <input type="text" id="email" name="email"><br>
+    <label for="password">password of new user:</label><br>
+    <input type="text" id="password" name="password"><br>
+    <label for="firstName">first_name of new user:</label><br>
+    <input type="text" id="firstName" name="firstName"><br>
+    <label for="lastName">last_name of new user:</label><br>
+    <input type="text" id="lastName" name="lastName"><br>
+    <label for="roleName">role of new user:</label><br>
+    <input type="text" id="roleName" name="roleName"><br>
     <button type="submit" class="but">Create</button>
 </form>
 </body>

@@ -1,6 +1,6 @@
 package spring.boot.services;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring.boot.converter.ProductConverter;
@@ -13,7 +13,7 @@ import spring.boot.repositories.ProductRepository;
 import java.math.BigDecimal;
 import java.util.List;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Service
 public class ProductService {
     @Autowired
