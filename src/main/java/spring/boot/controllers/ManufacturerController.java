@@ -8,6 +8,8 @@ import spring.boot.model.dao.ManufacturerDao;
 import spring.boot.services.ManufacturerService;
 import spring.boot.utils.CheckManufacturers;
 
+import javax.annotation.security.RolesAllowed;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/manufacturers")
@@ -17,13 +19,14 @@ public class ManufacturerController {
     @Autowired
     CheckManufacturers checkManufacturers;
 
-    @GetMapping("/createManufacturerForm")
+    @RolesAllowed("ADMIN")
+    @GetMapping("/admin/createManufacturerForm")
     public ModelAndView createManufacturerForm() {
 
         return new ModelAndView("manufacturers/createManufacturerForm");
     }
 
-    @PostMapping("/manufacturerCreated")
+    @PostMapping("/admin/manufacturerCreated")
     public ModelAndView createManufacturer(@ModelAttribute("manufacturerName") String manufacturerName, ManufacturerDao manufacturer
     ) {
         if (checkManufacturers.IsManufacturerNameExists(manufacturerName)) {
@@ -44,14 +47,14 @@ public class ManufacturerController {
 
         return mav;
     }
-
-    @GetMapping("/deleteManufacturerForm")
+    @RolesAllowed("ADMIN")
+    @GetMapping("/admin/deleteManufacturerForm")
     public ModelAndView deleteManufacturerForm() {
 
         return new ModelAndView("manufacturers/deleteManufacturerForm");
     }
 
-    @PostMapping("/manufacturerDeleted")
+    @PostMapping("/admin/manufacturerDeleted")
     public ModelAndView deleteManufacturer(@ModelAttribute("manufacturerName") String manufacturerName) {
 
         if (checkManufacturers.IsManufacturerNameExists(manufacturerName)) {
@@ -63,13 +66,14 @@ public class ManufacturerController {
         return new ModelAndView("manufacturers/manufacturerNameNotExists");
     }
 
-    @GetMapping("/updateManufacturerForm")
+    @RolesAllowed("ADMIN")
+    @GetMapping("/admin/updateManufacturerForm")
     public ModelAndView updateManufacturerForm() {
 
         return new ModelAndView("manufacturers/updateManufacturerForm");
     }
 
-    @PostMapping("/manufacturerUpdated")
+    @PostMapping("/admin/manufacturerUpdated")
     public ModelAndView updateManufacturer(@ModelAttribute("newName") String newName, @ModelAttribute("oldName") String oldName) {
 
         if (checkManufacturers.IsManufacturerNameExists(oldName)) {

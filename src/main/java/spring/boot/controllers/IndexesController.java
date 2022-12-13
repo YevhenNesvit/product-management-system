@@ -20,12 +20,6 @@ public class IndexesController {
         return new ModelAndView("index");
     }
 
-//    @GetMapping("/login")
-//    public ModelAndView getLogin() {
-//
-//        return new ModelAndView("login");
-//    }
-
     @GetMapping("/homepage")
     public ModelAndView getHomePage() {
         Set<String> roles = SecurityContextHolder
@@ -35,7 +29,6 @@ public class IndexesController {
                 .stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toSet());
-        System.out.println(roles);
         for (int i = 0; i < roles.size(); i++) {
             if (roles.contains("ROLE_ADMIN")) {
 
