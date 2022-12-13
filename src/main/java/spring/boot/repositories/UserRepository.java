@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import spring.boot.model.dao.RoleDao;
 import spring.boot.model.dao.UserDao;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -24,4 +25,6 @@ public interface UserRepository extends JpaRepository<UserDao, UUID> {
             "role = :role WHERE email = :oldEmail")
     void updateByEmail(@Param("newEmail") String newEmail, @Param("password") String password, @Param("firstName")
     String firstName, @Param("lastName") String lastName, @Param("role") RoleDao role, @Param("oldEmail") String oldEmail);
+
+    List<UserDao> findByEmail(String email);
 }

@@ -1,9 +1,11 @@
 package spring.boot.model.dto;
 
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
+@Component
 @AllArgsConstructor
 public class UserDto {
     private UUID id;
