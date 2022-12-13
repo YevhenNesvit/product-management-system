@@ -2,7 +2,6 @@ package spring.boot.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,9 +28,9 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests()
-                .antMatchers("/login", "/").permitAll()
+                .antMatchers("/login", "/", "/homepage").permitAll()
                 .antMatchers("/**/**").hasRole("ADMIN")
-//                .antMatchers("/api/**").permitAll()
+//                .antMatchers("/**/**").hasRole("USER")
                 .anyRequest()
                 .authenticated()
                 .and()

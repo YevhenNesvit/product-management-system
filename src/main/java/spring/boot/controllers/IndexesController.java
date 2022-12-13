@@ -1,13 +1,10 @@
 package spring.boot.controllers;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import spring.boot.repositories.UserRepository;
-import spring.boot.services.SecurityService;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -16,11 +13,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("")
 public class IndexesController {
-
-    @Autowired
-    private final UserRepository repository;
-    @Autowired
-    private final SecurityService securityService;
 
     @GetMapping("")
     public ModelAndView getIndex() {
@@ -35,7 +27,7 @@ public class IndexesController {
 //    }
 
     @GetMapping("/homepage")
-    public ModelAndView getAdminHome() {
+    public ModelAndView getHomePage() {
         Set<String> roles = SecurityContextHolder
                 .getContext()
                 .getAuthentication()
@@ -43,6 +35,7 @@ public class IndexesController {
                 .stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toSet());
+        System.out.println(roles);
         for (int i = 0; i < roles.size(); i++) {
             if (roles.contains("ROLE_ADMIN")) {
 
