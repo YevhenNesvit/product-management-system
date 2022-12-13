@@ -2,12 +2,15 @@ package spring.boot.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableWebSecurity
 public class WebSecurityConfig {
 //    @Override
 //    protected void configure(HttpSecurity http) throws Exception {
@@ -28,19 +31,21 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/products/**").hasRole("ADMIN")
-                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/**/**").permitAll()
+//                .antMatchers("/**/get**").hasRole("USER")
+                .antMatchers("/userhome").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
-//                .loginPage("/login")
-//                .loginProcessingUrl("/login")
+                .loginPage("/login")
+                .loginProcessingUrl("/perform-login")
                 .defaultSuccessUrl("/", false)
                 .failureUrl("/login.html?error=true")
                 .and()
                 .logout()
-                .logoutUrl("/logout");
+                .logoutUrl("/logout")
+                .deleteCookies("JSESSIONID");
 
         return http.build();
 
