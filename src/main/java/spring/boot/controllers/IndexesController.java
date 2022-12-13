@@ -7,12 +7,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("")
-public class IndexController {
+public class IndexesController {
 
-    @GetMapping("")
-    public ModelAndView getIndex() {
+    @GetMapping("/admin")
+    public ModelAndView getAdminHome() {
 
-        return new ModelAndView("index");
+        return new ModelAndView("adminhome");
+    }
+
+    @GetMapping("/user")
+    public ModelAndView getUserHome() {
+
+        return new ModelAndView("userhome");
     }
 
 }
