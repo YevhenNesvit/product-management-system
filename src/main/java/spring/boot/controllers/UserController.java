@@ -2,6 +2,7 @@ package spring.boot.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import spring.boot.model.dao.RoleDao;
@@ -25,6 +26,8 @@ public class UserController {
     private final GetRoleIdByName roleId;
     @Autowired
     private final CheckRoles checkRoles;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @RolesAllowed("ADMIN")
     @GetMapping("/createUserForm")
@@ -48,7 +51,7 @@ public class UserController {
             role.setName(roleName);
 
             user.setEmail(email);
-            user.setPassword(password);
+            user.setPassword(passwordEncoder.encode(password));
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setRole(role);
