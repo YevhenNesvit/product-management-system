@@ -12,6 +12,7 @@ import spring.boot.utils.CheckManufacturers;
 import spring.boot.utils.CheckProducts;
 import spring.boot.utils.GetManufacturerIdByName;
 
+import javax.annotation.security.RolesAllowed;
 import java.math.BigDecimal;
 
 @AllArgsConstructor
@@ -29,6 +30,7 @@ public class ProductController {
     @Autowired
     ManufacturerService manufacturerService;
 
+    @RolesAllowed("ADMIN")
     @GetMapping("/createProductForm")
     public ModelAndView createProductForm() {
         ModelAndView mav = new ModelAndView("products/createProductForm");
@@ -69,6 +71,7 @@ public class ProductController {
         return mav;
     }
 
+    @RolesAllowed("ADMIN")
     @GetMapping("/deleteProductForm")
     public ModelAndView deleteProductForm() {
 
@@ -87,6 +90,7 @@ public class ProductController {
         return new ModelAndView("products/productNameNotExists");
     }
 
+    @RolesAllowed("ADMIN")
     @GetMapping("/updateProductForm")
     public ModelAndView updateProductForm() {
 

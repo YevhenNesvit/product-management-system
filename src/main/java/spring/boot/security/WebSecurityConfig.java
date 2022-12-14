@@ -16,18 +16,6 @@ import org.springframework.security.web.SecurityFilterChain;
         jsr250Enabled = true)
 @Configuration
 public class WebSecurityConfig {
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//                .antMatchers("/").permitAll()
-//                .antMatchers("/index").hasAnyRole("ADMIN", "USER")
-//                .antMatchers("/products/*").hasRole("ADMIN")
-//                .antMatchers("/user").hasRole("USER")
-//                .and()
-//                .formLogin()
-//                .and()
-//                .httpBasic();
-//    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

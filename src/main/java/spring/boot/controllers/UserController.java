@@ -11,6 +11,8 @@ import spring.boot.utils.CheckRoles;
 import spring.boot.utils.CheckUsers;
 import spring.boot.utils.GetRoleIdByName;
 
+import javax.annotation.security.RolesAllowed;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/users")
@@ -24,6 +26,7 @@ public class UserController {
     @Autowired
     private final CheckRoles checkRoles;
 
+    @RolesAllowed("ADMIN")
     @GetMapping("/createUserForm")
     public ModelAndView createUserForm() {
         ModelAndView mav = new ModelAndView("users/createUserForm");
@@ -59,6 +62,7 @@ public class UserController {
         }
     }
 
+    @RolesAllowed("ADMIN")
     @GetMapping("/getUsers")
     public ModelAndView getUsers() {
         ModelAndView mav = new ModelAndView("users/getUsers");
@@ -67,6 +71,7 @@ public class UserController {
         return mav;
     }
 
+    @RolesAllowed("ADMIN")
     @GetMapping("/deleteUserForm")
     public ModelAndView deleteUserForm() {
 
@@ -85,6 +90,7 @@ public class UserController {
         return new ModelAndView("users/userEmailNotExists");
     }
 
+    @RolesAllowed("ADMIN")
     @GetMapping("/updateUserForm")
     public ModelAndView updateUserForm() {
 

@@ -8,6 +8,8 @@ import spring.boot.model.dao.RoleDao;
 import spring.boot.services.RoleService;
 import spring.boot.utils.CheckRoles;
 
+import javax.annotation.security.RolesAllowed;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/roles")
@@ -17,6 +19,7 @@ public class RoleController {
     @Autowired
     private final CheckRoles checkRoles;
 
+    @RolesAllowed("ADMIN")
     @GetMapping("/createRoleForm")
     public ModelAndView createRoleForm() {
 
@@ -36,6 +39,7 @@ public class RoleController {
         return new ModelAndView("roles/roleCreated");
     }
 
+    @RolesAllowed("ADMIN")
     @GetMapping("/getRoles")
     public ModelAndView getRoles() {
         ModelAndView mav = new ModelAndView("roles/getRoles");
@@ -44,6 +48,7 @@ public class RoleController {
         return mav;
     }
 
+    @RolesAllowed("ADMIN")
     @GetMapping("/deleteRoleForm")
     public ModelAndView deleteRoleForm() {
 
@@ -62,6 +67,7 @@ public class RoleController {
         return new ModelAndView("roles/roleNameNotExists");
     }
 
+    @RolesAllowed("ADMIN")
     @GetMapping("/updateRoleForm")
     public ModelAndView updateRoleForm() {
 
