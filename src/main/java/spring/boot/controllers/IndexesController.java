@@ -29,6 +29,7 @@ public class IndexesController {
                 .stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toSet());
+        System.out.println(roles);
         for (int i = 0; i < roles.size(); i++) {
             if (roles.contains("ROLE_ADMIN")) {
 
