@@ -1,5 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
 <nav th:fragment="navbar" class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -9,10 +10,10 @@
       <li><a href="/homepage">Home</a></li>
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Manufacturers<span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="/manufacturers/admin/createManufacturerForm">Create manufacturer</a></li>
-          <li><a href="/manufacturers/admin/deleteManufacturerForm">Delete manufacturer</a></li>
+          <li><a href="/manufacturers/createManufacturerForm">Create manufacturer</a></li>
+          <li><a href="/manufacturers/deleteManufacturerForm">Delete manufacturer</a></li>
           <li><a href="/manufacturers/getManufacturers">Get manufacturers</a></li>
-          <li><a href="/manufacturers/admin/updateManufacturerForm">Update manufacturer</a></li>
+          <li><a href="/manufacturers/updateManufacturerForm">Update manufacturer</a></li>
         </ul>
       </li>
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Products<span class="caret"></span></a>
@@ -23,7 +24,6 @@
           <li><a href="/products/updateProductForm">Update product</a></li>
         </ul>
       </li>
-      <sec:authorize access="hasRole('ADMIN')">
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Users<span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="/users/createUserForm">Create user</a></li>
@@ -32,7 +32,6 @@
           <li><a href="/users/updateUserForm">Update user</a></li>
         </ul>
       </li>
-      </sec:authorize>
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Roles<span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="/roles/createRoleForm">Create role</a></li>

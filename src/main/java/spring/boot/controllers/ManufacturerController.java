@@ -20,13 +20,13 @@ public class ManufacturerController {
     CheckManufacturers checkManufacturers;
 
     @RolesAllowed("ADMIN")
-    @GetMapping("/admin/createManufacturerForm")
+    @GetMapping("/createManufacturerForm")
     public ModelAndView createManufacturerForm() {
 
         return new ModelAndView("manufacturers/createManufacturerForm");
     }
 
-    @PostMapping("/admin/manufacturerCreated")
+    @PostMapping("/manufacturerCreated")
     public ModelAndView createManufacturer(@ModelAttribute("manufacturerName") String manufacturerName, ManufacturerDao manufacturer
     ) {
         if (checkManufacturers.IsManufacturerNameExists(manufacturerName)) {
@@ -48,13 +48,13 @@ public class ManufacturerController {
         return mav;
     }
     @RolesAllowed("ADMIN")
-    @GetMapping("/admin/deleteManufacturerForm")
+    @GetMapping("/deleteManufacturerForm")
     public ModelAndView deleteManufacturerForm() {
 
         return new ModelAndView("manufacturers/deleteManufacturerForm");
     }
 
-    @PostMapping("/admin/manufacturerDeleted")
+    @PostMapping("/manufacturerDeleted")
     public ModelAndView deleteManufacturer(@ModelAttribute("manufacturerName") String manufacturerName) {
 
         if (checkManufacturers.IsManufacturerNameExists(manufacturerName)) {
@@ -67,13 +67,13 @@ public class ManufacturerController {
     }
 
     @RolesAllowed("ADMIN")
-    @GetMapping("/admin/updateManufacturerForm")
+    @GetMapping("/updateManufacturerForm")
     public ModelAndView updateManufacturerForm() {
 
         return new ModelAndView("manufacturers/updateManufacturerForm");
     }
 
-    @PostMapping("/admin/manufacturerUpdated")
+    @PostMapping("/manufacturerUpdated")
     public ModelAndView updateManufacturer(@ModelAttribute("newName") String newName, @ModelAttribute("oldName") String oldName) {
 
         if (checkManufacturers.IsManufacturerNameExists(oldName)) {
