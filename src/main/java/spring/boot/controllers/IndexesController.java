@@ -64,10 +64,11 @@ public class IndexesController {
     public ModelAndView createUser(@ModelAttribute("email") String email, @ModelAttribute("password") String password,
                                    @ModelAttribute("confirm") String confirm, @ModelAttribute("firstName") String firstName,
                                    @ModelAttribute("lastName") String lastName, UserDao user, RoleDao role) {
-        if (email.equals("") || password.equals("") || firstName.equals("") || lastName.equals("")) {
-            if (!email.matches("^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$")) {
-                if (checkUsers.IsUserEmailExists(email)) {
+        if (!(email.equals("") || password.equals("") || firstName.equals("") || lastName.equals(""))) {
+            if (email.matches("^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$")) {
+                if (!checkUsers.IsUserEmailExists(email)) {
                     if (password.equals(confirm)) {
+
                         role.setId(roleId.getRoleIdByName("ROLE_USER"));
                         role.setName("ROLE_USER");
 
@@ -80,17 +81,22 @@ public class IndexesController {
                         userService.create(user);
 
                         return new ModelAndView("users/userRegistered");
+                    } else {
+
+                        return new ModelAndView("/passwordValidation");
                     }
 
-                    return new ModelAndView("users/userEmailAlreadyExists");
+                } else {
+
+                    return new ModelAndView("userAlreadyExists");
                 }
 
-                return new ModelAndView("/passwordValidation");
-            }
+            } else {
 
+                return new ModelAndView("/emailWrongFormat");
+            }
+        } else {
             return new ModelAndView("/fieldsCanNotBeEmpty");
         }
-
-        return new ModelAndView("/");
     }
 }
