@@ -44,7 +44,6 @@ public class IndexesController {
                 .stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toSet());
-        System.out.println(roles);
         for (int i = 0; i < roles.size(); i++) {
             if (roles.contains("ROLE_ADMIN")) {
 
@@ -65,26 +64,33 @@ public class IndexesController {
     public ModelAndView createUser(@ModelAttribute("email") String email, @ModelAttribute("password") String password,
                                    @ModelAttribute("confirm") String confirm, @ModelAttribute("firstName") String firstName,
                                    @ModelAttribute("lastName") String lastName, UserDao user, RoleDao role) {
+        if (email.equals("") || password.equals("") || firstName.equals("") || lastName.equals("")) {
+            if (!email.matches("^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$")) {
+                if (checkUsers.IsUserEmailExists(email)) {
+                    if (password.equals(confirm)) {
+                        role.setId(roleId.getRoleIdByName("ROLE_USER"));
+                        role.setName("ROLE_USER");
 
-        if (checkUsers.IsUserEmailExists(email)) {
+                        user.setEmail(email);
+                        user.setPassword(passwordEncoder.encode(password));
+                        user.setFirstName(firstName);
+                        user.setLastName(lastName);
+                        user.setRole(role);
 
-            return new ModelAndView("users/userEmailAlreadyExists");
-        } else if (password.equals(confirm)) {
-            role.setId(roleId.getRoleIdByName("ROLE_USER"));
-            role.setName("ROLE_USER");
+                        userService.create(user);
 
-            user.setEmail(email);
-            user.setPassword(passwordEncoder.encode(password));
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setRole(role);
+                        return new ModelAndView("users/userRegistered");
+                    }
 
-            userService.create(user);
+                    return new ModelAndView("users/userEmailAlreadyExists");
+                }
 
-            return new ModelAndView("users/userRegistered");
-        } else {
+                return new ModelAndView("/passwordValidation");
+            }
 
-            return new ModelAndView("/passwordValidation");
+            return new ModelAndView("/fieldsCanNotBeEmpty");
         }
+
+        return new ModelAndView("/");
     }
 }
