@@ -8,9 +8,7 @@ import spring.boot.model.dao.ManufacturerDao;
 import spring.boot.model.dao.ProductDao;
 import spring.boot.services.ManufacturerService;
 import spring.boot.services.ProductService;
-import spring.boot.utils.CheckManufacturers;
 import spring.boot.utils.CheckProducts;
-import spring.boot.utils.GetManufacturerIdByName;
 
 import javax.annotation.security.RolesAllowed;
 import java.math.BigDecimal;
@@ -23,10 +21,6 @@ public class ProductController {
     ProductService productService;
     @Autowired
     CheckProducts checkProducts;
-    @Autowired
-    GetManufacturerIdByName manufacturerId;
-    @Autowired
-    CheckManufacturers checkManufacturers;
     @Autowired
     ManufacturerService manufacturerService;
 
@@ -47,8 +41,8 @@ public class ProductController {
         if (checkProducts.IsProductNameExists(productName)) {
 
             return new ModelAndView("products/productNameAlreadyExists");
-        } else if (checkManufacturers.IsManufacturerNameExists(manufacturerName)) {
-            manufacturer.setId(manufacturerId.getManufacturerIdByName(manufacturerName));
+        } else if (manufacturerService.IsManufacturerNameExists(manufacturerName)) {
+            manufacturer.setId(manufacturerService.getManufacturerIdByName(manufacturerName));
             manufacturer.setName(manufacturerName);
 
             product.setName(productName);
@@ -102,8 +96,8 @@ public class ProductController {
                                       @ModelAttribute("manufacturerName") String manufacturerName,
                                       @ModelAttribute("oldName") String oldName, ManufacturerDao manufacturer) {
         if (checkProducts.IsProductNameExists(oldName)) {
-            if (checkManufacturers.IsManufacturerNameExists(manufacturerName)) {
-                manufacturer.setId(manufacturerId.getManufacturerIdByName(manufacturerName));
+            if (manufacturerService.IsManufacturerNameExists(manufacturerName)) {
+                manufacturer.setId(manufacturerService.getManufacturerIdByName(manufacturerName));
                 manufacturer.setName(manufacturerName);
                 productService.updateByName(newName, newPrice, manufacturer, oldName);
 

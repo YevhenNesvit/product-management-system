@@ -9,12 +9,14 @@ import spring.boot.model.dto.ManufacturerDto;
 import spring.boot.repositories.ManufacturerRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @AllArgsConstructor
 @Service
 public class ManufacturerService {
     @Autowired
     private final ManufacturerRepository repository;
+    @Autowired
     private final ManufacturerConverter converter;
 
     public void create(ManufacturerDao manufacturer) {
@@ -31,5 +33,25 @@ public class ManufacturerService {
 
     public void updateByName(String newName, String oldName) {
         repository.updateByName(newName, oldName);
+    }
+
+    public boolean IsManufacturerNameExists(String name) {
+        for (int i = 0; i < getManufacturers().size(); i++) {
+            if(getManufacturers().get(i).getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public UUID getManufacturerIdByName(String name) {
+        List<ManufacturerDto> manufacturers = getManufacturers();
+        UUID id = null;
+        for (ManufacturerDto manufacturer : manufacturers) {
+            if (manufacturer.getName().equals(name)) {
+                id = manufacturer.getId();
+            }
+        }
+        return id;
     }
 }

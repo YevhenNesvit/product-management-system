@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import spring.boot.model.dao.ManufacturerDao;
 import spring.boot.services.ManufacturerService;
-import spring.boot.utils.CheckManufacturers;
 
 import javax.annotation.security.RolesAllowed;
 
@@ -16,8 +15,6 @@ import javax.annotation.security.RolesAllowed;
 public class ManufacturerController {
     @Autowired
     ManufacturerService manufacturerService;
-    @Autowired
-    CheckManufacturers checkManufacturers;
 
     @RolesAllowed("ADMIN")
     @GetMapping("/createManufacturerForm")
@@ -29,7 +26,7 @@ public class ManufacturerController {
     @PostMapping("/manufacturerCreated")
     public ModelAndView createManufacturer(@ModelAttribute("manufacturerName") String manufacturerName, ManufacturerDao manufacturer
     ) {
-        if (checkManufacturers.IsManufacturerNameExists(manufacturerName)) {
+        if (manufacturerService.IsManufacturerNameExists(manufacturerName)) {
 
             return new ModelAndView("manufacturers/manufacturerNameAlreadyExists");
         }
@@ -57,7 +54,7 @@ public class ManufacturerController {
     @PostMapping("/manufacturerDeleted")
     public ModelAndView deleteManufacturer(@ModelAttribute("manufacturerName") String manufacturerName) {
 
-        if (checkManufacturers.IsManufacturerNameExists(manufacturerName)) {
+        if (manufacturerService.IsManufacturerNameExists(manufacturerName)) {
             manufacturerService.deleteByName(manufacturerName);
 
             return new ModelAndView("manufacturers/manufacturerDeleted");
@@ -76,7 +73,7 @@ public class ManufacturerController {
     @PostMapping("/manufacturerUpdated")
     public ModelAndView updateManufacturer(@ModelAttribute("newName") String newName, @ModelAttribute("oldName") String oldName) {
 
-        if (checkManufacturers.IsManufacturerNameExists(oldName)) {
+        if (manufacturerService.IsManufacturerNameExists(oldName)) {
             manufacturerService.updateByName(newName, oldName);
 
             return new ModelAndView("manufacturers/manufacturerUpdated");
