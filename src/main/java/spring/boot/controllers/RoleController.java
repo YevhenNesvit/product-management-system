@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import spring.boot.model.dao.RoleDao;
 import spring.boot.services.RoleService;
-import spring.boot.utils.CheckRoles;
 
 import javax.annotation.security.RolesAllowed;
 
@@ -16,8 +15,6 @@ import javax.annotation.security.RolesAllowed;
 public class RoleController {
     @Autowired
     private final RoleService roleService;
-    @Autowired
-    private final CheckRoles checkRoles;
 
     @RolesAllowed("ADMIN")
     @GetMapping("/createRoleForm")
@@ -28,7 +25,7 @@ public class RoleController {
 
     @PostMapping("/roleCreated")
     public ModelAndView createRole(@ModelAttribute("roleName") String roleName, RoleDao role) {
-        if (checkRoles.IsRoleNameExists(roleName)) {
+        if (roleService.IsRoleNameExists(roleName)) {
 
             return new ModelAndView("roles/roleNameAlreadyExists");
         }
@@ -58,7 +55,7 @@ public class RoleController {
     @PostMapping("/roleDeleted")
     public ModelAndView deleteRole(@ModelAttribute("roleName") String roleName) {
 
-        if (checkRoles.IsRoleNameExists(roleName)) {
+        if (roleService.IsRoleNameExists(roleName)) {
             roleService.deleteByName(roleName);
 
             return new ModelAndView("roles/roleDeleted");
@@ -77,7 +74,7 @@ public class RoleController {
     @PostMapping("/roleUpdated")
     public ModelAndView updateRole(@ModelAttribute("newName") String newName, @ModelAttribute("oldName") String oldName) {
 
-        if (checkRoles.IsRoleNameExists(oldName)) {
+        if (roleService.IsRoleNameExists(oldName)) {
             roleService.updateByName(newName, oldName);
 
             return new ModelAndView("roles/roleUpdated");

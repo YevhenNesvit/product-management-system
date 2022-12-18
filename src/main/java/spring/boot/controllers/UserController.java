@@ -7,10 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import spring.boot.model.dao.RoleDao;
 import spring.boot.model.dao.UserDao;
+import spring.boot.services.RoleService;
 import spring.boot.services.UserService;
-import spring.boot.utils.CheckRoles;
 import spring.boot.utils.CheckUsers;
-import spring.boot.utils.GetRoleIdByName;
 
 import javax.annotation.security.RolesAllowed;
 
@@ -23,9 +22,7 @@ public class UserController {
     @Autowired
     private final CheckUsers checkUsers;
     @Autowired
-    private final GetRoleIdByName roleId;
-    @Autowired
-    private final CheckRoles checkRoles;
+    private final RoleService roleService;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -46,8 +43,8 @@ public class UserController {
         if (checkUsers.IsUserEmailExists(email)) {
 
             return new ModelAndView("users/userEmailAlreadyExists");
-        } else if (checkRoles.IsRoleNameExists(roleName)) {
-            role.setId(roleId.getRoleIdByName(roleName));
+        } else if (roleService.IsRoleNameExists(roleName)) {
+            role.setId(roleService.getRoleIdByName(roleName));
             role.setName(roleName);
 
             user.setEmail(email);
@@ -106,8 +103,8 @@ public class UserController {
                                       @ModelAttribute("roleName") String roleName, @ModelAttribute("oldEmail") String oldEmail,
                                       RoleDao role) {
         if (checkUsers.IsUserEmailExists(oldEmail)) {
-            if (checkRoles.IsRoleNameExists(roleName)) {
-                role.setId(roleId.getRoleIdByName(roleName));
+            if (roleService.IsRoleNameExists(roleName)) {
+                role.setId(roleService.getRoleIdByName(roleName));
                 role.setName(roleName);
                 userService.updateByEmail(newEmail, password, firstName, lastName, role, oldEmail);
 

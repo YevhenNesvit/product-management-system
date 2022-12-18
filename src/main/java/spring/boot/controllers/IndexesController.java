@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import spring.boot.model.dao.RoleDao;
 import spring.boot.model.dao.UserDao;
+import spring.boot.services.RoleService;
 import spring.boot.services.UserService;
 import spring.boot.utils.CheckUsers;
-import spring.boot.utils.GetRoleIdByName;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -23,7 +23,7 @@ public class IndexesController {
     @Autowired
     private final CheckUsers checkUsers;
     @Autowired
-    private final GetRoleIdByName roleId;
+    private final RoleService roleService;
     @Autowired
     private final UserService userService;
     @Autowired
@@ -69,7 +69,7 @@ public class IndexesController {
                 if (!checkUsers.IsUserEmailExists(email)) {
                     if (password.equals(confirm)) {
 
-                        role.setId(roleId.getRoleIdByName("ROLE_USER"));
+                        role.setId(roleService.getRoleIdByName("ROLE_USER"));
                         role.setName("ROLE_USER");
 
                         user.setEmail(email);
