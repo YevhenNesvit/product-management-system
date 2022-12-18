@@ -8,7 +8,6 @@ import spring.boot.model.dao.ManufacturerDao;
 import spring.boot.model.dao.ProductDao;
 import spring.boot.services.ManufacturerService;
 import spring.boot.services.ProductService;
-import spring.boot.utils.CheckProducts;
 
 import javax.annotation.security.RolesAllowed;
 import java.math.BigDecimal;
@@ -19,8 +18,6 @@ import java.math.BigDecimal;
 public class ProductController {
     @Autowired
     ProductService productService;
-    @Autowired
-    CheckProducts checkProducts;
     @Autowired
     ManufacturerService manufacturerService;
 
@@ -38,7 +35,7 @@ public class ProductController {
                                       @ModelAttribute("manufacturerName") String manufacturerName, ProductDao product,
                                       ManufacturerDao manufacturer) {
 
-        if (checkProducts.IsProductNameExists(productName)) {
+        if (productService.IsProductNameExists(productName)) {
 
             return new ModelAndView("products/productNameAlreadyExists");
         } else if (manufacturerService.IsManufacturerNameExists(manufacturerName)) {
@@ -75,7 +72,7 @@ public class ProductController {
     @PostMapping("/productDeleted")
     public ModelAndView deleteManufacturer(@ModelAttribute("productName") String productName) {
 
-        if (checkProducts.IsProductNameExists(productName)) {
+        if (productService.IsProductNameExists(productName)) {
             productService.deleteByName(productName);
 
             return new ModelAndView("products/productDeleted");
@@ -95,7 +92,7 @@ public class ProductController {
     public ModelAndView updateProduct(@ModelAttribute("newName") String newName, @ModelAttribute("newPrice") BigDecimal newPrice,
                                       @ModelAttribute("manufacturerName") String manufacturerName,
                                       @ModelAttribute("oldName") String oldName, ManufacturerDao manufacturer) {
-        if (checkProducts.IsProductNameExists(oldName)) {
+        if (productService.IsProductNameExists(oldName)) {
             if (manufacturerService.IsManufacturerNameExists(manufacturerName)) {
                 manufacturer.setId(manufacturerService.getManufacturerIdByName(manufacturerName));
                 manufacturer.setName(manufacturerName);

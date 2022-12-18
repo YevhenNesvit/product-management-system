@@ -36,4 +36,13 @@ public class ProductService {
     public void updateByName(String newName, BigDecimal newPrice, ManufacturerDao newManufacturer, String oldName) {
         repository.updateByName(newName, newPrice, newManufacturer, oldName);
     }
+
+    public boolean IsProductNameExists(String name) {
+        for (int i = 0; i < getProducts().size(); i++) {
+            if (getProducts().get(i).getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
