@@ -11,7 +11,6 @@ import spring.boot.model.dao.RoleDao;
 import spring.boot.model.dao.UserDao;
 import spring.boot.services.RoleService;
 import spring.boot.services.UserService;
-import spring.boot.utils.CheckUsers;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -20,8 +19,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("")
 public class IndexesController {
-    @Autowired
-    private final CheckUsers checkUsers;
     @Autowired
     private final RoleService roleService;
     @Autowired
@@ -66,7 +63,7 @@ public class IndexesController {
                                    @ModelAttribute("lastName") String lastName, UserDao user, RoleDao role) {
         if (!(email.equals("") || password.equals("") || firstName.equals("") || lastName.equals(""))) {
             if (email.matches("^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$")) {
-                if (!checkUsers.IsUserEmailExists(email)) {
+                if (!userService.IsUserEmailExists(email)) {
                     if (password.equals(confirm)) {
 
                         role.setId(roleService.getRoleIdByName("ROLE_USER"));

@@ -35,4 +35,13 @@ public class UserService {
                               String oldEmail) {
         repository.updateByEmail(newEmail, password, first_name, lastName, role, oldEmail);
     }
+
+    public boolean IsUserEmailExists(String email) {
+        for (int i = 0; i < getUsers().size(); i++) {
+            if (getUsers().get(i).getEmail().equals(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

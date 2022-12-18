@@ -9,7 +9,6 @@ import spring.boot.model.dao.RoleDao;
 import spring.boot.model.dao.UserDao;
 import spring.boot.services.RoleService;
 import spring.boot.services.UserService;
-import spring.boot.utils.CheckUsers;
 
 import javax.annotation.security.RolesAllowed;
 
@@ -19,8 +18,6 @@ import javax.annotation.security.RolesAllowed;
 public class UserController {
     @Autowired
     private final UserService userService;
-    @Autowired
-    private final CheckUsers checkUsers;
     @Autowired
     private final RoleService roleService;
     @Autowired
@@ -40,7 +37,7 @@ public class UserController {
                                    @ModelAttribute("firstName") String firstName, @ModelAttribute("lastName") String lastName,
                                    @ModelAttribute("roleName") String roleName, UserDao user, RoleDao role) {
 
-        if (checkUsers.IsUserEmailExists(email)) {
+        if (userService.IsUserEmailExists(email)) {
 
             return new ModelAndView("users/userEmailAlreadyExists");
         } else if (roleService.IsRoleNameExists(roleName)) {
@@ -81,7 +78,7 @@ public class UserController {
     @PostMapping("/userDeleted")
     public ModelAndView deleteUser(@ModelAttribute("email") String email) {
 
-        if (checkUsers.IsUserEmailExists(email)) {
+        if (userService.IsUserEmailExists(email)) {
             userService.deleteByEmail(email);
 
             return new ModelAndView("users/userDeleted");
@@ -102,7 +99,7 @@ public class UserController {
                                       @ModelAttribute("firstName") String firstName, @ModelAttribute("lastName") String lastName,
                                       @ModelAttribute("roleName") String roleName, @ModelAttribute("oldEmail") String oldEmail,
                                       RoleDao role) {
-        if (checkUsers.IsUserEmailExists(oldEmail)) {
+        if (userService.IsUserEmailExists(oldEmail)) {
             if (roleService.IsRoleNameExists(roleName)) {
                 role.setId(roleService.getRoleIdByName(roleName));
                 role.setName(roleName);
