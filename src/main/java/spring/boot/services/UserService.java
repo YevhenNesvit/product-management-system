@@ -44,4 +44,13 @@ public class UserService {
         }
         return false;
     }
+
+    public boolean IsUserWithRoleExists(String name) {
+        for (int i = 0; i < getUsers().size(); i++) {
+            if (getUsers().get(i).getRole().getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import spring.boot.model.dao.ManufacturerDao;
 import spring.boot.services.ManufacturerService;
+import spring.boot.services.ProductService;
 
 import javax.annotation.security.RolesAllowed;
 
@@ -14,7 +15,9 @@ import javax.annotation.security.RolesAllowed;
 @RequestMapping("/manufacturers")
 public class ManufacturerController {
     @Autowired
-    ManufacturerService manufacturerService;
+    private final ManufacturerService manufacturerService;
+    @Autowired
+    private final ProductService productService;
 
     @RolesAllowed("ADMIN")
     @GetMapping("/createManufacturerForm")
@@ -55,12 +58,18 @@ public class ManufacturerController {
     public ModelAndView deleteManufacturer(@ModelAttribute("manufacturerName") String manufacturerName) {
 
         if (manufacturerService.IsManufacturerNameExists(manufacturerName)) {
-            manufacturerService.deleteByName(manufacturerName);
+            if (!productService.IsProductWithManufacturerExists(manufacturerName)) {
+                manufacturerService.deleteByName(manufacturerName);
 
-            return new ModelAndView("manufacturers/manufacturerDeleted");
+                return new ModelAndView("manufacturers/manufacturerDeleted");
+            } else {
+
+                return new ModelAndView("manufacturers/productWithThisManufacturerExists");
+            }
+        } else {
+
+            return new ModelAndView("manufacturers/manufacturerNameNotExists");
         }
-
-        return new ModelAndView("manufacturers/manufacturerNameNotExists");
     }
 
     @RolesAllowed("ADMIN")
