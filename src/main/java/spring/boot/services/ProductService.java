@@ -45,13 +45,4 @@ public class ProductService {
         }
         return false;
     }
-
-    public boolean IsProductWithManufacturerExists(String name) {
-        for (int i = 0; i < getProducts().size(); i++) {
-            if (getProducts().get(i).getManufacturer().getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
 }

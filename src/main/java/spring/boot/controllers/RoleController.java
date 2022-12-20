@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import spring.boot.model.dao.RoleDao;
 import spring.boot.services.RoleService;
-import spring.boot.services.UserService;
 
 import javax.annotation.security.RolesAllowed;
 
@@ -16,8 +15,6 @@ import javax.annotation.security.RolesAllowed;
 public class RoleController {
     @Autowired
     private final RoleService roleService;
-    @Autowired
-    private final UserService userService;
 
     @RolesAllowed("ADMIN")
     @GetMapping("/createRoleForm")
@@ -59,17 +56,12 @@ public class RoleController {
     public ModelAndView deleteRole(@ModelAttribute("roleName") String roleName) {
 
         if (roleService.IsRoleNameExists(roleName)) {
-            if (!userService.IsUserWithRoleExists(roleName)) {
-                roleService.deleteByName(roleName);
+            roleService.deleteByName(roleName);
 
-                return new ModelAndView("roles/roleDeleted");
-            } else {
-                return new ModelAndView("roles/userWithThisRoleExists");
-            }
-        } else {
-
-            return new ModelAndView("roles/roleNameNotExists");
+            return new ModelAndView("roles/roleDeleted");
         }
+
+        return new ModelAndView("roles/roleNameNotExists");
     }
 
     @RolesAllowed("ADMIN")
