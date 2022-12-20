@@ -27,11 +27,10 @@
 <div class ="center">
     <h2>Users</h2>
     <table border="2">
-        <tr><th>user_id</th><th>email</th><th>password</th><th>first_name</th><th>last_name</th><th>role</th></tr>
+        <tr><th>user_id</th><th>email</th><th>first_name</th><th>last_name</th><th>role</th></tr>
         <tr th:each="user: ${users}">
             <td th:text="${user.id}"></td>
             <td th:text="${user.email}"></td>
-            <td th:text="${user.password}"></td>
             <td th:text="${user.firstName}"></td>
             <td th:text="${user.lastName}"></td>
             <td th:text="${user.role.name}"></td>

@@ -16,6 +16,7 @@ create table if not exists users
     role_id UUID,
         FOREIGN KEY (role_id)
             REFERENCES roles
+            ON DELETE CASCADE
 );
 
 alter table roles owner to postgres;

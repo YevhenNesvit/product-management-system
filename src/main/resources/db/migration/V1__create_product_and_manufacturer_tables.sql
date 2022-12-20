@@ -14,6 +14,7 @@ create table if not exists products
 	manufacturer_id UUID,
     	FOREIGN KEY (manufacturer_id)
             REFERENCES manufacturers
+            ON DELETE CASCADE
 );
 
 alter table products owner to postgres;
