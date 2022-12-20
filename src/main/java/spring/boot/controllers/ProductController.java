@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import spring.boot.model.dao.ManufacturerDao;
-import spring.boot.model.dao.ProductDao;
+import spring.boot.model.dto.ManufacturerDto;
+import spring.boot.model.dto.ProductDto;
 import spring.boot.services.ManufacturerService;
 import spring.boot.services.ProductService;
 
@@ -32,8 +32,8 @@ public class ProductController {
 
     @PostMapping("/productCreated")
     public ModelAndView createProduct(@ModelAttribute("productName") String productName, @ModelAttribute("price") BigDecimal price,
-                                      @ModelAttribute("manufacturerName") String manufacturerName, ProductDao product,
-                                      ManufacturerDao manufacturer) {
+                                      @ModelAttribute("manufacturerName") String manufacturerName, ProductDto product,
+                                      ManufacturerDto manufacturer) {
 
         if (productService.IsProductNameExists(productName)) {
 
@@ -91,7 +91,7 @@ public class ProductController {
     @PostMapping("/productUpdated")
     public ModelAndView updateProduct(@ModelAttribute("newName") String newName, @ModelAttribute("newPrice") BigDecimal newPrice,
                                       @ModelAttribute("manufacturerName") String manufacturerName,
-                                      @ModelAttribute("oldName") String oldName, ManufacturerDao manufacturer) {
+                                      @ModelAttribute("oldName") String oldName, ManufacturerDto manufacturer) {
         if (productService.IsProductNameExists(oldName)) {
             if (manufacturerService.IsManufacturerNameExists(manufacturerName)) {
                 manufacturer.setId(manufacturerService.getManufacturerIdByName(manufacturerName));

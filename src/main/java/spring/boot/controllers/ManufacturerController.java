@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import spring.boot.model.dao.ManufacturerDao;
+import spring.boot.model.dto.ManufacturerDto;
 import spring.boot.services.ManufacturerService;
 
 import javax.annotation.security.RolesAllowed;
@@ -19,19 +19,19 @@ public class ManufacturerController {
     @RolesAllowed("ADMIN")
     @GetMapping("/createManufacturerForm")
     public ModelAndView createManufacturerForm() {
-
-        return new ModelAndView("manufacturers/createManufacturerForm");
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("ManufacturerDto", new ManufacturerDto());
+        mav.setViewName("manufacturers/createManufacturerForm");
+        return mav;
     }
 
     @PostMapping("/manufacturerCreated")
-    public ModelAndView createManufacturer(@ModelAttribute("manufacturerName") String manufacturerName, ManufacturerDao manufacturer
-    ) {
-        if (manufacturerService.IsManufacturerNameExists(manufacturerName)) {
+    public ModelAndView createManufacturer(@ModelAttribute ManufacturerDto manufacturer) {
+        if (manufacturerService.IsManufacturerNameExists(manufacturer.getName())) {
 
             return new ModelAndView("manufacturers/manufacturerNameAlreadyExists");
         }
 
-        manufacturer.setName(manufacturerName);
         manufacturerService.create(manufacturer);
 
         return new ModelAndView("manufacturers/manufacturerCreated");

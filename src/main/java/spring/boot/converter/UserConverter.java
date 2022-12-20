@@ -34,4 +34,19 @@ public class UserConverter implements Converter<UserDto, UserDao> {
 
         return dtoList;
     }
+
+    @Override
+    public UserDao to(UserDto entity) {
+        UserDao userDao = new UserDao();
+        RoleConverter converter = new RoleConverter();
+
+        userDao.setId(entity.getId());
+        userDao.setEmail(entity.getEmail());
+        userDao.setPassword(entity.getPassword());
+        userDao.setFirstName(entity.getFirstName());
+        userDao.setLastName(entity.getLastName());
+        userDao.setRole(converter.to(entity.getRole()));
+
+        return userDao;
+    }
 }

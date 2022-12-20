@@ -4,9 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring.boot.converter.ProductConverter;
-import spring.boot.model.dao.ManufacturerDao;
-import spring.boot.model.dao.ProductDao;
 
+import spring.boot.model.dto.ManufacturerDto;
 import spring.boot.model.dto.ProductDto;
 import spring.boot.repositories.ProductRepository;
 
@@ -21,8 +20,8 @@ public class ProductService {
     @Autowired
     private final ProductConverter converter;
 
-    public void create(ProductDao product) {
-        repository.save(product);
+    public void create(ProductDto product) {
+        repository.save(converter.to(product));
     }
 
     public List<ProductDto> getProducts() {
@@ -33,7 +32,7 @@ public class ProductService {
         repository.deleteByName(name);
     }
 
-    public void updateByName(String newName, BigDecimal newPrice, ManufacturerDao newManufacturer, String oldName) {
+    public void updateByName(String newName, BigDecimal newPrice, ManufacturerDto newManufacturer, String oldName) {
         repository.updateByName(newName, newPrice, newManufacturer, oldName);
     }
 

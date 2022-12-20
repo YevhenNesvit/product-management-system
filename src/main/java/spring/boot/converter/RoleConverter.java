@@ -29,4 +29,14 @@ public class RoleConverter implements Converter<RoleDto, RoleDao> {
 
         return dtoList;
     }
+
+    @Override
+    public RoleDao to(RoleDto entity) {
+        RoleDao roleDao = new RoleDao();
+
+        roleDao.setId(entity.getId());
+        roleDao.setName(entity.getName());
+
+        return roleDao;
+    }
 }

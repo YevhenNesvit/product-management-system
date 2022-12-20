@@ -32,4 +32,17 @@ public class ProductConverter implements Converter<ProductDto, ProductDao> {
 
         return dtoList;
     }
+
+    @Override
+    public ProductDao to(ProductDto entity) {
+        ProductDao productDao = new ProductDao();
+        ManufacturerConverter converter = new ManufacturerConverter();
+
+        productDao.setId(entity.getId());
+        productDao.setName(entity.getName());
+        productDao.setPrice(entity.getPrice());
+        productDao.setManufacturer(converter.to(entity.getManufacturer()));
+
+        return productDao;
+    }
 }

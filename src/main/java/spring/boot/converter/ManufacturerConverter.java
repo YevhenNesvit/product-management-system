@@ -29,4 +29,14 @@ public class ManufacturerConverter implements Converter<ManufacturerDto, Manufac
 
         return dtoList;
     }
+
+    @Override
+    public ManufacturerDao to(ManufacturerDto entity) {
+        ManufacturerDao manufacturerDao = new ManufacturerDao();
+
+        manufacturerDao.setId(entity.getId());
+        manufacturerDao.setName(entity.getName());
+
+        return manufacturerDao;
+    }
 }

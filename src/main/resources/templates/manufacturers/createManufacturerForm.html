@@ -17,9 +17,9 @@
 </head>
 <body>
 <div th:insert="navbar :: navbar">  </div>
-<form method="post" class="center" th:action="@{/manufacturers/manufacturerCreated}">
+<form method="post" class="center" th:action="@{/manufacturers/manufacturerCreated}" th:object="${ManufacturerDto}">
     <label for="manufacturerName"> Please, enter manufacturer_name of new manufacturer:</label><br>
-    <input type="text" id="manufacturerName" name="manufacturerName"><br>
+    <input type="text" id="manufacturerName" name="manufacturerName" th:field="*{name}"><br>
     <button type="submit" class="but">Create</button>
 </form>
 </body>

@@ -7,4 +7,6 @@ public interface Converter<E, T> {
     E from(T entity);
 
     List<E> fromList(List<T> list);
+
+    T to(E entity);
 }

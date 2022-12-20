@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import spring.boot.model.dao.ManufacturerDao;
 import spring.boot.model.dao.ProductDao;
+import spring.boot.model.dto.ManufacturerDto;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -23,5 +23,5 @@ public interface ProductRepository extends JpaRepository<ProductDao, UUID> {
     @Transactional
     @Query("UPDATE Product SET name = :newName, price = :newPrice, manufacturer = :newManufacturer WHERE name = :oldName")
     void updateByName(@Param("newName") String newName, @Param("newPrice") BigDecimal newPrice, @Param("newManufacturer")
-    ManufacturerDao newManufacturer, @Param("oldName") String oldName);
+    ManufacturerDto newManufacturer, @Param("oldName") String oldName);
 }
