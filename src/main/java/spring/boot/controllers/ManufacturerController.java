@@ -2,15 +2,19 @@ package spring.boot.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import spring.boot.model.dto.ManufacturerDto;
 import spring.boot.services.ManufacturerService;
 
 import javax.annotation.security.RolesAllowed;
+import javax.validation.Valid;
 
 @AllArgsConstructor
-@RestController
+@Controller
 @RequestMapping("/manufacturers")
 public class ManufacturerController {
     @Autowired
@@ -25,16 +29,21 @@ public class ManufacturerController {
         return mav;
     }
 
-    @PostMapping("/manufacturerCreated")
-    public ModelAndView createManufacturer(@ModelAttribute ManufacturerDto manufacturer) {
-        if (manufacturerService.IsManufacturerNameExists(manufacturer.getName())) {
+    @PostMapping("/createManufacturerForm")
+    public ModelAndView createManufacturer(@ModelAttribute("ManufacturerDto") @Valid ManufacturerDto manufacturer, BindingResult bindingResult,
+                                           Model model) {
+        if (bindingResult.hasErrors()) {
+
+            return new ModelAndView("manufacturers/createManufacturerForm");
+        } else if (manufacturerService.IsManufacturerNameExists(manufacturer.getName())) {
 
             return new ModelAndView("manufacturers/manufacturerNameAlreadyExists");
+        } else {
+            model.addAttribute("manufacturer", manufacturer);
+            manufacturerService.create(manufacturer);
+
+            return new ModelAndView("manufacturers/manufacturerCreated");
         }
-
-        manufacturerService.create(manufacturer);
-
-        return new ModelAndView("manufacturers/manufacturerCreated");
     }
 
     @GetMapping("/getManufacturers")
@@ -44,6 +53,7 @@ public class ManufacturerController {
 
         return mav;
     }
+
     @RolesAllowed("ADMIN")
     @GetMapping("/deleteManufacturerForm")
     public ModelAndView deleteManufacturerForm() {

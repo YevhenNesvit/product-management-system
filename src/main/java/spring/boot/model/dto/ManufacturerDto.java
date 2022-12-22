@@ -2,12 +2,14 @@ package spring.boot.model.dto;
 
 import lombok.AllArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 import java.util.UUID;
 
 @AllArgsConstructor
 public class ManufacturerDto {
     private UUID Id;
+    @NotBlank
     private String name;
     private Set<ProductDto> products;
 
