@@ -23,15 +23,15 @@ public class ManufacturerController {
     @RolesAllowed("ADMIN")
     @GetMapping("/createManufacturerForm")
     public ModelAndView createManufacturerForm() {
-        ModelAndView mav = new ModelAndView();
+        ModelAndView mav = new ModelAndView("manufacturers/createManufacturerForm");
         mav.addObject("ManufacturerDto", new ManufacturerDto());
-        mav.setViewName("manufacturers/createManufacturerForm");
+
         return mav;
     }
 
     @PostMapping("/createManufacturerForm")
-    public ModelAndView createManufacturer(@ModelAttribute("ManufacturerDto") @Valid ManufacturerDto manufacturer, BindingResult bindingResult,
-                                           Model model) {
+    public ModelAndView createManufacturer(@ModelAttribute("ManufacturerDto") @Valid ManufacturerDto manufacturer,
+                                           BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
 
             return new ModelAndView("manufacturers/createManufacturerForm");
