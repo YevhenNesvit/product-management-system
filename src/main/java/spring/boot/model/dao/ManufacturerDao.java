@@ -38,7 +38,7 @@ public class ManufacturerDao {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "manufacturer", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "manufacturer", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     public Set<ProductDao> getProducts() {
         return products;
     }

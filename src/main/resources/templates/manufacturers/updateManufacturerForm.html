@@ -13,13 +13,19 @@
             .but {
                 margin-top: .2%;
             }
+            .error {
+                display: inline;
+                position: absolute;
+                color: red;
+                right: 38%;
         </style>
     </head>
     <body>
       <div th:insert="navbar :: navbar">  </div>
-        <form method="post" class="center" th:action="@{/manufacturers/manufacturerUpdated}">
-            <label for="newName">Please, enter new manufacturer_name:</label><br>
-            <input type="text" id="newName" name="newName"><br>
+        <form method="post" class="center" th:action="@{/manufacturers/updateManufacturerForm}" th:object="${ManufacturerDto}">
+            <label>Please, enter new manufacturer_name:</label><br>
+            <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+            <input type="text" th:field="*{name}"><br>
             <label for="oldName">old manufacturer_name to update:</label><br>
             <input type="text" id="oldName" name="oldName"><br>
             <button type="submit" class="but">Update</button>

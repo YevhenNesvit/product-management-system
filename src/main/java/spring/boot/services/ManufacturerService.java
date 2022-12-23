@@ -30,10 +30,6 @@ public class ManufacturerService {
         repository.deleteByName(name);
     }
 
-    public void updateByName(String newName, String oldName) {
-        repository.updateByName(newName, oldName);
-    }
-
     public boolean IsManufacturerNameExists(String name) {
         for (int i = 0; i < getManufacturers().size(); i++) {
             if(getManufacturers().get(i).getName().equals(name)) {

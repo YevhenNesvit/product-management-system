@@ -39,7 +39,7 @@ public class ManufacturerController {
 
             return new ModelAndView("manufacturers/manufacturerNameAlreadyExists");
         } else {
-            model.addAttribute("manufacturer", manufacturer);
+            model.addAttribute("ManufacturerDto", manufacturer);
             manufacturerService.create(manufacturer);
 
             return new ModelAndView("manufacturers/manufacturerCreated");
@@ -76,19 +76,28 @@ public class ManufacturerController {
     @RolesAllowed("ADMIN")
     @GetMapping("/updateManufacturerForm")
     public ModelAndView updateManufacturerForm() {
+        ModelAndView mav = new ModelAndView("manufacturers/updateManufacturerForm");
+        mav.addObject("ManufacturerDto", new ManufacturerDto());
 
-        return new ModelAndView("manufacturers/updateManufacturerForm");
+        return mav;
     }
 
-    @PostMapping("/manufacturerUpdated")
-    public ModelAndView updateManufacturer(@ModelAttribute("newName") String newName, @ModelAttribute("oldName") String oldName) {
+    @PostMapping("/updateManufacturerForm")
+    public ModelAndView updateManufacturer(@ModelAttribute("ManufacturerDto") @Valid ManufacturerDto manufacturer,
+                                           BindingResult bindingResult, Model model, @ModelAttribute("oldName") String oldName) {
+        if (bindingResult.hasErrors()) {
 
-        if (manufacturerService.IsManufacturerNameExists(oldName)) {
-            manufacturerService.updateByName(newName, oldName);
+            return new ModelAndView("manufacturers/updateManufacturerForm");
+
+        } else if (manufacturerService.IsManufacturerNameExists(oldName)) {
+            model.addAttribute("ManufacturerDto", manufacturer);
+            manufacturer.setId(manufacturerService.getManufacturerIdByName(oldName));
+            manufacturerService.create(manufacturer);
 
             return new ModelAndView("manufacturers/manufacturerUpdated");
-        }
+        } else {
 
-        return new ModelAndView("manufacturers/manufacturerNameNotExists");
+            return new ModelAndView("manufacturers/manufacturerNameNotExists");
+        }
     }
 }
