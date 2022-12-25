@@ -5,5 +5,5 @@
 .iws
 .iml
 .ipr
-target
+#target
 .DS_STORE /src/main/resources/log
