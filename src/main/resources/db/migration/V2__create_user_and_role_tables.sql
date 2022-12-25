@@ -4,7 +4,7 @@ create table if not exists roles
     role_name VARCHAR(200) NOT NULL
 );
 
-alter table roles owner to postgres;
+alter table roles owner to yevhen;
 
 create table if not exists users
 (
@@ -19,4 +19,4 @@ create table if not exists users
             ON DELETE CASCADE
 );
 
-alter table roles owner to postgres;
+alter table roles owner to yevhen;
