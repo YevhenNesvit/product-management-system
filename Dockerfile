@@ -4,7 +4,7 @@ WORKDIR /opt/app
 
 COPY . ./
 
-RUN mvn clean package
+RUN mvn clean install
 
 FROM adoptopenjdk/openjdk11:alpine-jre
 
