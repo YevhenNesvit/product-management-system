@@ -12,8 +12,6 @@ ARG JAR_FILE=target/goit-java-dev-hw-8-1.0-SNAPSHOT.jar
 
 WORKDIR /opt/app
 
-EXPOSE 8080
-
 COPY ${JAR_FILE} app.jar
 
 ENTRYPOINT ["java","-jar","app.jar"]
