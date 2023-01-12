@@ -2,12 +2,14 @@ package spring.boot.model.dto;
 
 import lombok.AllArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 import java.util.UUID;
 
 @AllArgsConstructor
 public class RoleDto {
     private UUID id;
+    @NotBlank
     private String name;
     private Set<UserDto> users;
 
