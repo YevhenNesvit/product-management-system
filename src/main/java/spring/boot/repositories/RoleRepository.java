@@ -16,9 +16,4 @@ public interface RoleRepository extends JpaRepository<RoleDao, UUID> {
     @Transactional
     @Query("DELETE FROM Role WHERE name = :name")
     void deleteByName(@Param("name") String name);
-
-    @Modifying
-    @Transactional
-    @Query("UPDATE Role SET name = :newName WHERE name = :oldName")
-    void updateByName(@Param("newName") String newName, @Param("oldName") String oldName);
 }

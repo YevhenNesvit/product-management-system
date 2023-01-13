@@ -76,19 +76,27 @@ public class RoleController {
     @RolesAllowed("ADMIN")
     @GetMapping("/updateRoleForm")
     public ModelAndView updateRoleForm() {
+        ModelAndView mav = new ModelAndView("roles/updateRoleForm");
+        mav.addObject("RoleDto", new RoleDto());
 
-        return new ModelAndView("roles/updateRoleForm");
+        return mav;
     }
 
-    @PostMapping("/roleUpdated")
-    public ModelAndView updateRole(@ModelAttribute("newName") String newName, @ModelAttribute("oldName") String oldName) {
+    @PostMapping("/updateRoleForm")
+    public ModelAndView updateRole(@ModelAttribute("RoleDto") @Valid RoleDto role, BindingResult bindingResult, Model model,
+                                   @ModelAttribute("oldName") String oldName) {
+        if (bindingResult.hasErrors()) {
 
-        if (roleService.IsRoleNameExists(oldName)) {
-            roleService.updateByName(newName, oldName);
+            return new ModelAndView("roles/updateRoleForm");
+        } else if (roleService.IsRoleNameExists(oldName)) {
+            model.addAttribute("RoleDto", role);
+            role.setId(roleService.getRoleIdByName(oldName));
+            roleService.create(role);
 
             return new ModelAndView("roles/roleUpdated");
-        }
+        } else {
 
-        return new ModelAndView("roles/roleNameNotExists");
+            return new ModelAndView("roles/roleNameNotExists");
+        }
     }
 }

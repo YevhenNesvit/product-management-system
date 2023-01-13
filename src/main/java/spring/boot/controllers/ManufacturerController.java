@@ -88,7 +88,6 @@ public class ManufacturerController {
         if (bindingResult.hasErrors()) {
 
             return new ModelAndView("manufacturers/updateManufacturerForm");
-
         } else if (manufacturerService.IsManufacturerNameExists(oldName)) {
             model.addAttribute("ManufacturerDto", manufacturer);
             manufacturer.setId(manufacturerService.getManufacturerIdByName(oldName));
