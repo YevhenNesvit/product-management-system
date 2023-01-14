@@ -27,6 +27,12 @@ public class IndexesController {
         return new ModelAndView("index");
     }
 
+    @GetMapping("/login")
+    public ModelAndView getLogin() {
+
+        return new ModelAndView("login");
+    }
+
     @GetMapping("/homepage")
     public ModelAndView getHomePage() {
 

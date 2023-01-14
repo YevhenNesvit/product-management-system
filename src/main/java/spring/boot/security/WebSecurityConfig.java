@@ -28,12 +28,15 @@ public class WebSecurityConfig {
                 .authenticated()
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("/homepage", false)
-                .failureUrl("/login.html?error=true")
+                .usernameParameter("email")
+                .loginPage("/login")
+                .permitAll()
+                .defaultSuccessUrl("/homepage", true)
+                .failureUrl("/login")
                 .and()
                 .logout()
-                .logoutUrl("/logout")
-                .deleteCookies("JSESSIONID");
+                .permitAll()
+                .deleteCookies();
 
         return http.build();
 

@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>Registration</title>
+    <title>Log in</title>
     <style>
             .center {
                 text-align: center;
@@ -16,18 +16,12 @@
         </style>
 </head>
 <body>
-<form method="post" class="center" th:action="@{/users/userRegistered}">
-    <label for="email"> Please, enter email of new user:</label><br>
+<form method="post" class="center" th:action="@{/login}">
+    <label> Please, enter email:</label><br>
     <input type="text" id="email" name="email"><br>
-    <label for="password">password of new user:</label><br>
+    <label>password:</label><br>
     <input type="password" id="password" name="password"><br>
-    <label for="confirm">confirm password:</label><br>
-    <input type="password" id="confirm" name="confirm"><br>
-    <label for="firstName">first_name of new user:</label><br>
-    <input type="text" id="firstName" name="firstName"><br>
-    <label for="lastName">last_name of new user:</label><br>
-    <input type="text" id="lastName" name="lastName"><br>
-    <button type="submit" class="but">Register</button>
+    <button type="submit" class="but">Log in</button>
 </form>
 </body>
 </html>
