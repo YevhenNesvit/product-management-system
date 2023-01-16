@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring.boot.converter.UserConverter;
 import spring.boot.model.dao.RoleDao;
-import spring.boot.model.dao.UserDao;
 import spring.boot.model.dto.UserDto;
 import spring.boot.repositories.UserRepository;
 
@@ -19,8 +18,8 @@ public class UserService {
     @Autowired
     private final UserConverter converter;
 
-    public void create(UserDao user) {
-        repository.save(user);
+    public void create(UserDto user) {
+        repository.save(converter.to(user));
     }
 
     public List<UserDto> getUsers() {

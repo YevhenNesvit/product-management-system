@@ -5,8 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import spring.boot.converter.RoleConverter;
 import spring.boot.model.dao.RoleDao;
-import spring.boot.model.dao.UserDao;
+import spring.boot.model.dto.UserDto;
 import spring.boot.services.RoleService;
 import spring.boot.services.UserService;
 
@@ -22,6 +23,8 @@ public class UserController {
     private final RoleService roleService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private final RoleConverter converter;
 
     @RolesAllowed("ADMIN")
     @GetMapping("/createUserForm")
@@ -35,7 +38,7 @@ public class UserController {
     @PostMapping("/userCreated")
     public ModelAndView createUser(@ModelAttribute("email") String email, @ModelAttribute("password") String password,
                                    @ModelAttribute("firstName") String firstName, @ModelAttribute("lastName") String lastName,
-                                   @ModelAttribute("roleName") String roleName, UserDao user, RoleDao role) {
+                                   @ModelAttribute("roleName") String roleName, UserDto user, RoleDao role) {
 
         if (userService.IsUserEmailExists(email)) {
 
@@ -48,7 +51,7 @@ public class UserController {
             user.setPassword(passwordEncoder.encode(password));
             user.setFirstName(firstName);
             user.setLastName(lastName);
-            user.setRole(role);
+            user.setRole(converter.from(role));
 
             userService.create(user);
 

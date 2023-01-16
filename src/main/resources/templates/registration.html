@@ -13,12 +13,19 @@
             .but {
                 margin-top: .2%;
             }
+            .error {
+                display: inline;
+                position: absolute;
+                color: red;
+                font-weight: bold;
+                right: 29%;
         </style>
 </head>
 <body>
-<form method="post" class="center" th:action="@{/users/userRegistered}">
-    <label for="email"> Please, enter email of new user:</label><br>
-    <input type="text" id="email" name="email"><br>
+<form method="post" class="center" th:action="@{/registration}" th:object="${UserDto}">
+    <label>Please, enter email of new user:</label><br>
+    <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
+    <input type="text" th:field="*{email}"><br>
     <label for="password">password of new user:</label><br>
     <input type="password" id="password" name="password"><br>
     <label for="confirm">confirm password:</label><br>
