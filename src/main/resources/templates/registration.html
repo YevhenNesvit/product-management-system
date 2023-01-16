@@ -18,22 +18,26 @@
                 position: absolute;
                 color: red;
                 font-weight: bold;
-                right: 29%;
+                right: 31%;
+            }
         </style>
 </head>
 <body>
 <form method="post" class="center" th:action="@{/registration}" th:object="${UserDto}">
-    <label>Please, enter email of new user:</label><br>
+    <label>Please fill in the fields below</label><br>
     <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
-    <input type="text" th:field="*{email}"><br>
-    <label for="password">password of new user:</label><br>
-    <input type="password" id="password" name="password"><br>
-    <label for="confirm">confirm password:</label><br>
-    <input type="password" id="confirm" name="confirm"><br>
-    <label for="firstName">first_name of new user:</label><br>
-    <input type="text" id="firstName" name="firstName"><br>
-    <label for="lastName">last_name of new user:</label><br>
-    <input type="text" id="lastName" name="lastName"><br>
+    <input type="text" placeholder="Email" th:field="*{email}"><br>
+    <label></label><br>
+    <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
+    <input type="password" placeholder="Password" th:field="*{password}"><br>
+    <label for="confirm"></label><br>
+    <input type="password" placeholder="Confirm password" id="confirm" name="confirm"><br>
+    <label></label><br>
+    <span class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name Error</span>
+    <input type="text" placeholder="First name" th:field="*{firstName}"><br>
+    <label></label><br>
+    <span class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name Error</span>
+    <input type="text" placeholder="Last name" th:field="*{lastName}"><br>
     <button type="submit" class="but">Register</button>
 </form>
 </body>
