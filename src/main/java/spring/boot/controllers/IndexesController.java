@@ -62,7 +62,7 @@ public class IndexesController {
             return new ModelAndView("registration");
         } else if (userService.IsUserEmailExists(user.getEmail())) {
 
-            return new ModelAndView("userAlreadyExists");
+            return new ModelAndView("users/userAlreadyExists");
         } else if (!user.getPassword().equals(confirm)) {
 
             return new ModelAndView("/passwordValidation");

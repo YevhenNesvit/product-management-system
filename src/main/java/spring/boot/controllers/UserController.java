@@ -42,7 +42,7 @@ public class UserController {
 
         if (userService.IsUserEmailExists(email)) {
 
-            return new ModelAndView("users/userEmailAlreadyExists");
+            return new ModelAndView("users/userAlreadyExists");
         } else if (roleService.IsRoleNameExists(roleName)) {
             role.setId(roleService.getRoleIdByName(roleName));
             role.setName(roleName);
