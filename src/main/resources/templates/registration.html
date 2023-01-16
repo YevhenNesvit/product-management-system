@@ -11,21 +11,28 @@
                 margin-top: 11%;
             }
             .but {
-                margin-top: .2%;
+                margin-top: 1.1%;
             }
             .error {
                 display: inline;
                 position: absolute;
                 color: red;
                 font-weight: bold;
-                right: 31%;
+                right: 38%;
+            }
+            .email {
+                display: inline;
+                position: absolute;
+                color: red;
+                font-weight: bold;
+                right: 31.5%;
             }
         </style>
 </head>
 <body>
 <form method="post" class="center" th:action="@{/registration}" th:object="${UserDto}">
     <label>Please fill in the fields below</label><br>
-    <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
+    <span class="email" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
     <input type="text" placeholder="Email" th:field="*{email}"><br>
     <label></label><br>
     <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>

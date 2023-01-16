@@ -12,7 +12,6 @@ import java.util.UUID;
 public class UserDto {
     private UUID id;
     @Email(regexp = "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")
-    @NotBlank
     private String email;
     @NotBlank
     private String password;
