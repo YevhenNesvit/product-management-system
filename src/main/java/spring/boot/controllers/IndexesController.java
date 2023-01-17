@@ -64,8 +64,10 @@ public class IndexesController {
 
             return new ModelAndView("users/userAlreadyExists");
         } else if (!user.getPassword().equals(confirm)) {
+            ModelAndView mav = new ModelAndView("registration");
+            mav.addObject("confirm", "Passwords do not match!");
 
-            return new ModelAndView("/passwordValidation");
+            return mav;
         } else {
             model.addAttribute("UserDto", user);
             role.setId(roleService.getRoleIdByName("ROLE_USER"));

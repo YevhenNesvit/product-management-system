@@ -25,9 +25,16 @@
                 position: absolute;
                 color: red;
                 font-weight: bold;
-                right: 27.5%;
+                right: 25.9%;
             }
-        @media (min-width: 1400px) {
+            .confirm {
+                display: inline;
+                position: absolute;
+                color: red;
+                font-weight: bold;
+                right: 31%;
+            }
+        @media (min-width: 1920px) {
             .error {
                 display: inline;
                 position: absolute;
@@ -42,6 +49,13 @@
                 font-weight: bold;
                 right: 31.5%;
             }
+            .confirm {
+                display: inline;
+                position: absolute;
+                color: red;
+                font-weight: bold;
+                right: 31%;
+            }
         }
         </style>
 </head>
@@ -53,8 +67,9 @@
     <label></label><br>
     <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
     <input type="password" placeholder="Password" th:field="*{password}"><br>
-    <label for="confirm"></label><br>
-    <input type="password" placeholder="Confirm password" id="confirm" name="confirm"><br>
+    <label></label><br>
+    <span class="confirm" th:text="${confirm}">Confirm error></span>
+    <input type="password" placeholder="Confirm password"><br>
     <label></label><br>
     <span class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name Error</span>
     <input type="text" placeholder="First name" th:field="*{firstName}"><br>
