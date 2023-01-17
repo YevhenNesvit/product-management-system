@@ -60,14 +60,14 @@ public class IndexesController {
         if (bindingResult.hasErrors()) {
 
             return new ModelAndView("registration");
-        } else if (userService.IsUserEmailExists(user.getEmail())) {
-
-            return new ModelAndView("users/userAlreadyExists");
         } else if (!user.getPassword().equals(confirm)) {
             ModelAndView mav = new ModelAndView("registration");
             mav.addObject("confirm", "Passwords do not match!");
 
             return mav;
+        } else if (userService.IsUserEmailExists(user.getEmail())) {
+
+            return new ModelAndView("users/userAlreadyExists");
         } else {
             model.addAttribute("UserDto", user);
             role.setId(roleService.getRoleIdByName("ROLE_USER"));
