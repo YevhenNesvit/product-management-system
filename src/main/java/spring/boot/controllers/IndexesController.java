@@ -66,12 +66,15 @@ public class IndexesController {
 
             return mav;
         } else if (userService.IsUserEmailExists(user.getEmail())) {
+            ModelAndView mav = new ModelAndView();
+            mav.addObject("userExists", "User already exists!");
 
-            return new ModelAndView("users/userAlreadyExists");
+            return mav;
         } else {
             ModelAndView mav = new ModelAndView("login");
             mav.addObject("success", "User successfully registered!");
             model.addAttribute("UserDto", user);
+
             role.setId(roleService.getRoleIdByName("ROLE_USER"));
             role.setName("ROLE_USER");
 

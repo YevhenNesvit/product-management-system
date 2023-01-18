@@ -26,6 +26,13 @@
                 font-weight: bold;
                 right: 31%;
             }
+            .user {
+                display: inline;
+                position: absolute;
+                color: red;
+                font-weight: bold;
+                right: 33.1%;
+            }
         @media (min-width: 1920px) {
             .error {
                 display: inline;
@@ -47,5 +54,12 @@
                 color: red;
                 font-weight: bold;
                 right: 35%;
+            }
+            .user {
+                display: inline;
+                position: absolute;
+                color: red;
+                font-weight: bold;
+                right: 37.1%;
             }
         }
