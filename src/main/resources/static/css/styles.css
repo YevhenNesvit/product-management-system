@@ -62,4 +62,8 @@
                 font-weight: bold;
                 right: 37.1%;
             }
+            .success {
+                color: green;
+                font-weight: bold;
+            }
         }

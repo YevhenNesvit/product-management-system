@@ -2,29 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Log in</title>
-    <style>
-            .center {
-                text-align: center;
-                margin-top: 11%;
-            }
-            .but {
-                margin-top: 1.1%;
-            }
-            .success {
-                color: green;
-                font-weight: bold;
-        </style>
 </head>
 <body>
 <form method="post" class="center" th:action="@{/login}">
     <p class="success" th:text="${success}">Successful registration</p>
     <label>Please, enter email:</label><br>
-    <input type="text" id="email" name="email"><br>
+    <input type="text" placeholder="Email"><br>
     <label>and password:</label><br>
-    <input type="password" id="password" name="password"><br>
+    <input type="password" placeholder="Password"><br>
     <button type="submit" class="but">Log in</button>
 </form>
 </body>
