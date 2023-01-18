@@ -61,14 +61,16 @@ public class IndexesController {
 
             return new ModelAndView("registration");
         } else if (!user.getPassword().equals(confirm)) {
-            ModelAndView mav = new ModelAndView("registration");
-            mav.addObject("confirm", "Passwords do not match!");
+            ModelAndView mav = new ModelAndView();
+            mav.addObject("confirmation", "Passwords do not match!");
 
             return mav;
         } else if (userService.IsUserEmailExists(user.getEmail())) {
 
             return new ModelAndView("users/userAlreadyExists");
         } else {
+            ModelAndView mav = new ModelAndView("login");
+            mav.addObject("success", "User successfully registered!");
             model.addAttribute("UserDto", user);
             role.setId(roleService.getRoleIdByName("ROLE_USER"));
             role.setName("ROLE_USER");
@@ -78,7 +80,7 @@ public class IndexesController {
 
             userService.create(user);
 
-            return new ModelAndView("users/userRegistered");
+            return mav;
         }
     }
 }

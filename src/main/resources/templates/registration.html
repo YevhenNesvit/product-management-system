@@ -16,8 +16,8 @@
     <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
     <input type="password" placeholder="Password" th:field="*{password}"><br>
     <label></label><br>
-    <span class="confirm" th:text="${confirm}">Confirm error></span>
-    <input type="password" placeholder="Confirm password"><br>
+    <span class="confirm" th:text="${confirmation}">Confirm error></span>
+    <input type="password" name="confirm" placeholder="Confirm password"><br>
     <label></label><br>
     <span class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name Error</span>
     <input type="text" placeholder="First name" th:field="*{firstName}"><br>

@@ -11,12 +11,16 @@
                 margin-top: 11%;
             }
             .but {
-                margin-top: .2%;
+                margin-top: 1.1%;
             }
+            .success {
+                color: green;
+                font-weight: bold;
         </style>
 </head>
 <body>
 <form method="post" class="center" th:action="@{/login}">
+    <p class="success" th:text="${success}">Successful registration</p>
     <label>Please, enter email:</label><br>
     <input type="text" id="email" name="email"><br>
     <label>and password:</label><br>
