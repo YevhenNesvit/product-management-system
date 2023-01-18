@@ -1,0 +1,51 @@
+.center {
+                text-align: center;
+                margin-top: 11%;
+            }
+            .but {
+                margin-top: 1.1%;
+            }
+            .error {
+                display: inline;
+                position: absolute;
+                color: red;
+                font-weight: bold;
+                right: 34%;
+            }
+            .email {
+                display: inline;
+                position: absolute;
+                color: red;
+                font-weight: bold;
+                right: 25.9%;
+            }
+            .confirm {
+                display: inline;
+                position: absolute;
+                color: red;
+                font-weight: bold;
+                right: 31%;
+            }
+        @media (min-width: 1920px) {
+            .error {
+                display: inline;
+                position: absolute;
+                color: red;
+                font-weight: bold;
+                right: 38%;
+            }
+            .email {
+                display: inline;
+                position: absolute;
+                color: red;
+                font-weight: bold;
+                right: 31.5%;
+            }
+            .confirm {
+                display: inline;
+                position: absolute;
+                color: red;
+                font-weight: bold;
+                right: 35%;
+            }
+        }
