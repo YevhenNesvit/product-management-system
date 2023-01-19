@@ -4,7 +4,7 @@ create table if not exists manufacturers
     manufacturer_name VARCHAR(200) NOT NULL UNIQUE
 );
 
-alter table manufacturers owner to postgres;
+alter table manufacturers owner to postgresql;
 
 create table if not exists products
 (
@@ -17,4 +17,4 @@ create table if not exists products
             ON DELETE CASCADE
 );
 
-alter table products owner to postgres;
+alter table products owner to postgresql;
