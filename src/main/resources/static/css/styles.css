@@ -1,9 +1,13 @@
 .center {
-                text-align: center;
-                margin-top: 11%;
-            }
+     text-align: center;
+     margin-top: 11%;
+}
             .but {
                 margin-top: 1.1%;
+            }
+            .cent {
+                text-align: center;
+                margin-top: .4%;
             }
             .error {
                 display: inline;
@@ -32,6 +36,10 @@
                 color: red;
                 font-weight: bold;
                 right: 33.1%;
+            }
+            .success {
+                color: green;
+                font-weight: bold;
             }
         @media (min-width: 1920px) {
             .error {

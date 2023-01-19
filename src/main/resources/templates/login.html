@@ -11,10 +11,16 @@
 <form method="post" class="center" th:action="@{/login}">
     <p class="success" th:text="${success}">Successful registration</p>
     <label>Please, enter email:</label><br>
-    <input type="text" placeholder="Email"><br>
+    <span class="email" th:if="${param.error}" th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"
+          th:text="${errorMsg}">User do not exists</span>
+    <input type="text" placeholder="Email" name="email"><br>
     <label>and password:</label><br>
-    <input type="password" placeholder="Password"><br>
+    <input type="password" placeholder="Password" name="password"><br>
     <button type="submit" class="but">Log in</button>
+    <div class="cent">
+    <label>or</label><br>
+    <a th:href="@{/registration}" class="but">Register</a>
+    </div>
 </form>
 </body>
 </html>

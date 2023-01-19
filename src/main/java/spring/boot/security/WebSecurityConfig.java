@@ -33,7 +33,7 @@ public class WebSecurityConfig {
                 .loginPage("/login")
                 .permitAll()
                 .defaultSuccessUrl("/homepage", true)
-                .failureUrl("/login")
+                .failureUrl("/login?error")
                 .and()
                 .logout()
                 .permitAll()
