@@ -41,6 +41,10 @@
                 color: green;
                 font-weight: bold;
             }
+            .failure {
+                color: red;
+                font-weight: bold;
+            }
         @media (min-width: 1920px) {
             .error {
                 display: inline;
@@ -69,9 +73,5 @@
                 color: red;
                 font-weight: bold;
                 right: 37.1%;
-            }
-            .success {
-                color: green;
-                font-weight: bold;
             }
         }
