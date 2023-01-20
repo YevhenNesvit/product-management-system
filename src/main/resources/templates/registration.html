@@ -8,14 +8,14 @@
     <title>Registration</title>
 </head>
 <body>
-<form autocomplete="off" method="post" class="center" th:action="@{/registration}" th:object="${UserDto}">
+<form method="post" class="center" th:action="@{/registration}" th:object="${UserDto}">
     <label>Please fill in the fields below</label><br>
     <span class="email" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
     <span class="user" th:text="${userExists}">User exists</span>
-    <input type="text" placeholder="Email" th:field="*{email}"><br>
+    <input type="text" placeholder="Email" th:field="*{email}" autocomplete="new-password"><br>
     <label></label><br>
     <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
-    <input type="password" placeholder="Password" th:field="*{password}"><br>
+    <input type="password" placeholder="Password" th:field="*{password}" autocomplete="new-password"><br>
     <label></label><br>
     <span class="confirm" th:text="${confirmation}">Confirm error></span>
     <input type="password" name="confirm" placeholder="Confirm password"><br>
