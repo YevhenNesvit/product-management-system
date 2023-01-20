@@ -8,14 +8,14 @@
     <title>Log in</title>
 </head>
 <body>
-<form method="post" class="center" th:action="@{/login}">
+<form autocomplete="off" method="post" class="center" th:action="@{/login}">
     <p class="success" th:text="${success}">Successful registration</p>
     <p class="failure" th:if="${param.error}" th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"
        th:text="${errorMsg}">User or password do not exist</p>
     <label>Please, enter email:</label><br>
-    <input type="text" placeholder="Email" autocomplete="new-password"><br>
+    <input type="text" placeholder="Email" name="email"><br>
     <label>and password:</label><br>
-    <input type="password" placeholder="Password" autocomplete="new-password"><br>
+    <input type="password" placeholder="Password" name="password"><br>
     <button type="submit" class="but">Log in</button>
     <div class="cent">
     <label>or</label><br>
