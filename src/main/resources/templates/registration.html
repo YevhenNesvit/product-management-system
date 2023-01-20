@@ -8,7 +8,7 @@
     <title>Registration</title>
 </head>
 <body>
-<form autocomplete="off" method="post" class="center" th:action="@{/registration}" th:object="${UserDto}">
+<form method="post" class="center" th:action="@{/registration}" th:object="${UserDto}">
     <label>Please fill in the fields below</label><br>
     <span class="email" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
     <span class="user" th:text="${userExists}">User exists</span>
