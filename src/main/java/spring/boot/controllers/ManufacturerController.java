@@ -36,8 +36,10 @@ public class ManufacturerController {
 
             return new ModelAndView("manufacturers/createManufacturerForm");
         } else if (manufacturerService.IsManufacturerNameExists(manufacturer.getName())) {
+            ModelAndView mav = new ModelAndView();
+            mav.addObject("manufacturerExists", "Manufacturer already exists!");
 
-            return new ModelAndView("manufacturers/manufacturerNameAlreadyExists");
+            return mav;
         } else {
             model.addAttribute("ManufacturerDto", manufacturer);
             manufacturerService.create(manufacturer);

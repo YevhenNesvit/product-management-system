@@ -2,6 +2,7 @@ package spring.boot.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import spring.boot.model.dto.ManufacturerDto;
@@ -13,7 +14,7 @@ import javax.annotation.security.RolesAllowed;
 import java.math.BigDecimal;
 
 @AllArgsConstructor
-@RestController
+@Controller
 @RequestMapping("/products")
 public class ProductController {
     @Autowired

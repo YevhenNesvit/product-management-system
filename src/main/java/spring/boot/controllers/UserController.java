@@ -3,6 +3,7 @@ package spring.boot.controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import spring.boot.converter.RoleConverter;
@@ -14,7 +15,7 @@ import spring.boot.services.UserService;
 import javax.annotation.security.RolesAllowed;
 
 @AllArgsConstructor
-@RestController
+@Controller
 @RequestMapping("/users")
 public class UserController {
     @Autowired
