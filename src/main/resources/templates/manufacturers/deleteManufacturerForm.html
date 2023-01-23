@@ -19,7 +19,7 @@
     <div th:insert="navbar :: navbar">  </div>
         <form method="post" class="center" th:action="@{/manufacturers/manufacturerDeleted}">
             <label for="manufacturerName">Please, enter manufacturer_name to delete:</label><br>
-            <input type="text" id="manufacturerName" name="manufacturerName"><br>
+            <input type="text" id="manufacturerName" name="manufacturerName" placeholder="Name"><br>
             <button type="submit" class="but">Delete</button>
         </form>
     </body>

@@ -10,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 import spring.boot.model.dto.ManufacturerDto;
 import spring.boot.services.ManufacturerService;
 
-import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @AllArgsConstructor
@@ -20,7 +19,6 @@ public class ManufacturerController {
     @Autowired
     ManufacturerService manufacturerService;
 
-    @RolesAllowed("ADMIN")
     @GetMapping("/createManufacturerForm")
     public ModelAndView createManufacturerForm() {
         ModelAndView mav = new ModelAndView("manufacturers/createManufacturerForm");
@@ -56,7 +54,6 @@ public class ManufacturerController {
         return mav;
     }
 
-    @RolesAllowed("ADMIN")
     @GetMapping("/deleteManufacturerForm")
     public ModelAndView deleteManufacturerForm() {
 
@@ -75,7 +72,6 @@ public class ManufacturerController {
         return new ModelAndView("manufacturers/manufacturerNameNotExists");
     }
 
-    @RolesAllowed("ADMIN")
     @GetMapping("/updateManufacturerForm")
     public ModelAndView updateManufacturerForm() {
         ModelAndView mav = new ModelAndView("manufacturers/updateManufacturerForm");
