@@ -2,23 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" th:href="@{/css/styles.css}">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <title>Delete manufacturer</title>
-        <style>
-            .center {
-                text-align: center;
-                margin-top: 11%;
-            }
-            .but {
-                margin-top: .2%;
-            }
-        </style>
     </head>
     <body>
     <div th:insert="navbar :: navbar">  </div>
-        <form method="post" class="center" th:action="@{/manufacturers/manufacturerDeleted}">
+        <form method="post" class="center" th:action="@{/manufacturers/deleteManufacturerForm}">
             <label for="manufacturerName">Please, enter manufacturer_name to delete:</label><br>
+            <span class="confirm" th:text="${manufacturerDoesNotExists}">Manufacturer does not exists</span>
             <input type="text" id="manufacturerName" name="manufacturerName" placeholder="Name"><br>
             <button type="submit" class="but">Delete</button>
         </form>

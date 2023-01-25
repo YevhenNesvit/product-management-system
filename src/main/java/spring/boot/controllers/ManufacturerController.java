@@ -1,6 +1,5 @@
 package spring.boot.controllers;
 
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +11,6 @@ import spring.boot.services.ManufacturerService;
 
 import javax.validation.Valid;
 
-@AllArgsConstructor
 @Controller
 @RequestMapping("/manufacturers")
 public class ManufacturerController {
@@ -60,7 +58,7 @@ public class ManufacturerController {
         return new ModelAndView("manufacturers/deleteManufacturerForm");
     }
 
-    @PostMapping("/manufacturerDeleted")
+    @PostMapping("/deleteManufacturerForm")
     public ModelAndView deleteManufacturer(@ModelAttribute("manufacturerName") String manufacturerName) {
 
         if (manufacturerService.IsManufacturerNameExists(manufacturerName)) {
@@ -68,8 +66,10 @@ public class ManufacturerController {
 
             return new ModelAndView("manufacturers/manufacturerDeleted");
         }
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("manufacturerDoesNotExists", "Manufacturer does not exist!");
 
-        return new ModelAndView("manufacturers/manufacturerNameNotExists");
+        return mav;
     }
 
     @GetMapping("/updateManufacturerForm")
