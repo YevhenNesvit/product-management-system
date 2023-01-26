@@ -2,30 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" th:href="@{/css/styles.css}">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <title>Update manufacturer</title>
-        <style>
-            .center {
-                text-align: center;
-                margin-top: 11%;
-            }
-            .but {
-                margin-top: .2%;
-            }
-            .error {
-                display: inline;
-                position: absolute;
-                color: red;
-                font-weight: bold;
-                right: 38%;
-        </style>
     </head>
     <body>
       <div th:insert="navbar :: navbar">  </div>
         <form method="post" class="center" th:action="@{/manufacturers/updateManufacturerForm}" th:object="${ManufacturerDto}">
             <label>Please, enter new manufacturer_name:</label><br>
             <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+            <span class="confirm" th:text="${manufacturerDoesNotExists}">Manufacturer does not exists</span>
             <input type="text" th:field="*{name}" placeholder="Name"><br>
             <label for="oldName">old manufacturer_name to update:</label><br>
             <input type="text" id="oldName" name="oldName" placeholder="Old name"><br>

@@ -93,8 +93,10 @@ public class ManufacturerController {
 
             return new ModelAndView("manufacturers/manufacturerUpdated");
         } else {
+            ModelAndView mav = new ModelAndView();
+            mav.addObject("manufacturerDoesNotExists", "Manufacturer does not exist!");
 
-            return new ModelAndView("manufacturers/manufacturerNameNotExists");
+            return mav;
         }
     }
 }

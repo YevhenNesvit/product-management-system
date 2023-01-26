@@ -45,14 +45,14 @@
      color: red;
      font-weight: bold;
 }
-        @media (min-width: 1920px) {
-            .error {
-                display: inline;
-                position: absolute;
-                color: red;
-                font-weight: bold;
-                right: 38%;
-            }
+@media (min-width: 1920px) {
+.error {
+     display: inline;
+     position: absolute;
+     color: red;
+     font-weight: bold;
+     right: 38%;
+}
             .email {
                 display: inline;
                 position: absolute;
