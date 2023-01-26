@@ -12,9 +12,9 @@
         <form method="post" class="center" th:action="@{/manufacturers/updateManufacturerForm}" th:object="${ManufacturerDto}">
             <label>Please, enter new manufacturer_name:</label><br>
             <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
-            <span class="confirm" th:text="${manufacturerDoesNotExists}">Manufacturer does not exists</span>
             <input type="text" th:field="*{name}" placeholder="Name"><br>
             <label for="oldName">old manufacturer_name to update:</label><br>
+            <span class="confirm" th:text="${manufacturerDoesNotExists}">Manufacturer does not exists</span>
             <input type="text" id="oldName" name="oldName" placeholder="Old name"><br>
             <button type="submit" class="but">Update</button>
         </form>
