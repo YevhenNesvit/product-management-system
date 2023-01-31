@@ -2,12 +2,14 @@ package spring.boot.model.dto;
 
 import lombok.AllArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.util.UUID;
 
 @AllArgsConstructor
 public class ProductDto {
     private UUID Id;
+    @NotBlank
     private String name;
     private BigDecimal price;
     private ManufacturerDto manufacturer;

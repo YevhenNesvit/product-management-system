@@ -1,5 +1,6 @@
 package spring.boot.controllers;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,11 +12,12 @@ import spring.boot.services.ManufacturerService;
 
 import javax.validation.Valid;
 
+@AllArgsConstructor
 @Controller
 @RequestMapping("/manufacturers")
 public class ManufacturerController {
     @Autowired
-    ManufacturerService manufacturerService;
+    private final ManufacturerService manufacturerService;
 
     @GetMapping("/createManufacturerForm")
     public ModelAndView createManufacturerForm() {

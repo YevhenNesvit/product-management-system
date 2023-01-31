@@ -2,24 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" th:href="@{/css/styles.css}">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <title>Create product</title>
-        <style>
-            .center {
-                text-align: center;
-                margin-top: 11%;
-            }
-            .but {
-                margin-top: .2%;
-            }
-        </style>
     </head>
     <body>
     <div th:insert="navbar :: navbar">  </div>
-        <form method="post" class="center" th:action="@{/products/productCreated}">
-            <label for="productName"> Please, enter product_name of new product:</label><br>
-            <input type="text" id="productName" name="productName"><br>
+        <form method="post" class="center" th:action="@{/products/createProductForm}" th:object="${ProductDto}">
+            <label> Please, enter product_name of new product:</label><br>
+            <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+            <input type="text" placeholder="Name" th:field="*{name}"><br>
             <label for="price">price of new product:</label><br>
             <input type="text" id="price" name="price"><br>
             <label for="manufacturerName">manufacturer_name of new product:</label><br>

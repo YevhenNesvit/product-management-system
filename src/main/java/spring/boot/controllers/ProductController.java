@@ -3,14 +3,19 @@ package spring.boot.controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import spring.boot.converter.ManufacturerConverter;
+import spring.boot.model.dao.ManufacturerDao;
 import spring.boot.model.dto.ManufacturerDto;
 import spring.boot.model.dto.ProductDto;
 import spring.boot.services.ManufacturerService;
 import spring.boot.services.ProductService;
 
 import javax.annotation.security.RolesAllowed;
+import javax.validation.Valid;
 import java.math.BigDecimal;
 
 @AllArgsConstructor
@@ -18,34 +23,36 @@ import java.math.BigDecimal;
 @RequestMapping("/products")
 public class ProductController {
     @Autowired
-    ProductService productService;
+    private final ProductService productService;
     @Autowired
-    ManufacturerService manufacturerService;
+    private final ManufacturerService manufacturerService;
+    @Autowired
+    private final ManufacturerConverter converter;
 
-    @RolesAllowed("ADMIN")
     @GetMapping("/createProductForm")
     public ModelAndView createProductForm() {
         ModelAndView mav = new ModelAndView("products/createProductForm");
         mav.addObject("manufacturers", manufacturerService.getManufacturers());
+        mav.addObject("ProductDto", new ProductDto());
 
         return mav;
     }
 
-    @PostMapping("/productCreated")
-    public ModelAndView createProduct(@ModelAttribute("productName") String productName, @ModelAttribute("price") BigDecimal price,
-                                      @ModelAttribute("manufacturerName") String manufacturerName, ProductDto product,
-                                      ManufacturerDto manufacturer) {
+    @PostMapping("/createProductForm")
+    public ModelAndView createProduct(@ModelAttribute("ProductDto") @Valid ProductDto product, BindingResult bindingResult,
+                                      Model model, ManufacturerDao manufacturer) {
+        if (bindingResult.hasErrors()) {
 
-        if (productService.IsProductNameExists(productName)) {
+            return new ModelAndView("products/createProductForm");
+        } else if (productService.IsProductNameExists(product.getName())) {
 
             return new ModelAndView("products/productNameAlreadyExists");
-        } else if (manufacturerService.IsManufacturerNameExists(manufacturerName)) {
-            manufacturer.setId(manufacturerService.getManufacturerIdByName(manufacturerName));
-            manufacturer.setName(manufacturerName);
+        } else if (manufacturerService.IsManufacturerNameExists(manufacturer.getName())) {
+            model.addAttribute("ProductDto", product);
+            manufacturer.setId(manufacturerService.getManufacturerIdByName(manufacturer.getName()));
+            manufacturer.setName(manufacturer.getName());
 
-            product.setName(productName);
-            product.setPrice(price);
-            product.setManufacturer(manufacturer);
+            product.setManufacturer(converter.from(manufacturer));
             productService.create(product);
 
             return new ModelAndView("products/productCreated");
