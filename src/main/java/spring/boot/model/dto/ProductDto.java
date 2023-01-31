@@ -2,6 +2,7 @@ package spring.boot.model.dto;
 
 import lombok.AllArgsConstructor;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -11,6 +12,7 @@ public class ProductDto {
     private UUID Id;
     @NotBlank
     private String name;
+    @Digits(integer = 9, fraction = 2, message = "Wrong format of price")
     private BigDecimal price;
     private ManufacturerDto manufacturer;
 

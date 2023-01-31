@@ -40,17 +40,18 @@ public class ProductController {
 
     @PostMapping("/createProductForm")
     public ModelAndView createProduct(@ModelAttribute("ProductDto") @Valid ProductDto product, BindingResult bindingResult,
-                                      Model model, ManufacturerDao manufacturer) {
+                                      @ModelAttribute("manufacturerName") String manufacturerName, Model model,
+                                      ManufacturerDao manufacturer) {
         if (bindingResult.hasErrors()) {
 
             return new ModelAndView("products/createProductForm");
         } else if (productService.IsProductNameExists(product.getName())) {
 
             return new ModelAndView("products/productNameAlreadyExists");
-        } else if (manufacturerService.IsManufacturerNameExists(manufacturer.getName())) {
+        } else if (manufacturerService.IsManufacturerNameExists(manufacturerName)) {
             model.addAttribute("ProductDto", product);
-            manufacturer.setId(manufacturerService.getManufacturerIdByName(manufacturer.getName()));
-            manufacturer.setName(manufacturer.getName());
+            manufacturer.setId(manufacturerService.getManufacturerIdByName(manufacturerName));
+            manufacturer.setName(manufacturerName);
 
             product.setManufacturer(converter.from(manufacturer));
             productService.create(product);

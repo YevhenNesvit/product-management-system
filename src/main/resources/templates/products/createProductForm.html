@@ -13,8 +13,9 @@
             <label> Please, enter product_name of new product:</label><br>
             <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
             <input type="text" placeholder="Name" th:field="*{name}"><br>
-            <label for="price">price of new product:</label><br>
-            <input type="text" id="price" name="price"><br>
+            <label>price of new product:</label><br>
+            <span class="user" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</span>
+            <input type="text" placeholder="Price" th:field="*{price}"><br>
             <label for="manufacturerName">manufacturer_name of new product:</label><br>
             <input type="search" list="myList" id="manufacturerName" name="manufacturerName"><br>
             <datalist id="myList">
