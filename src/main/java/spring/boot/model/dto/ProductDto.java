@@ -12,7 +12,7 @@ public class ProductDto {
     private UUID Id;
     @NotBlank
     private String name;
-    @Digits(integer = 9, fraction = 2, message = "Wrong format of price")
+    @Digits(integer = 9, fraction = 2, message = "Acceptable format is 000000000.00")
     private BigDecimal price;
     private ManufacturerDto manufacturer;
 

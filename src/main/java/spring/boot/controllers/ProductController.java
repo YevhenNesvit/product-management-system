@@ -46,8 +46,10 @@ public class ProductController {
 
             return new ModelAndView("products/createProductForm");
         } else if (productService.IsProductNameExists(product.getName())) {
+            ModelAndView mav = new ModelAndView();
+            mav.addObject("productExists", "Product already exists!");
 
-            return new ModelAndView("products/productNameAlreadyExists");
+            return mav;
         } else if (manufacturerService.IsManufacturerNameExists(manufacturerName)) {
             model.addAttribute("ProductDto", product);
             manufacturer.setId(manufacturerService.getManufacturerIdByName(manufacturerName));

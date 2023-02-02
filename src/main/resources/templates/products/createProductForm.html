@@ -12,6 +12,7 @@
         <form method="post" class="center" th:action="@{/products/createProductForm}" th:object="${ProductDto}">
             <label> Please, enter product_name of new product:</label><br>
             <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+            <span class="confirm" th:text="${productExists}">Product exists</span>
             <input type="text" placeholder="Name" th:field="*{name}"><br>
             <label>price of new product:</label><br>
             <span class="user" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</span>
