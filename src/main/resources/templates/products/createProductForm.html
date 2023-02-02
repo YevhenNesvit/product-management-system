@@ -15,7 +15,7 @@
             <span class="confirm" th:text="${productExists}">Product exists</span>
             <input type="text" placeholder="Name" th:field="*{name}"><br>
             <label>price of new product:</label><br>
-            <span class="user" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</span>
+            <span class="email" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</span>
             <input type="text" placeholder="Price" th:field="*{price}"><br>
             <label for="manufacturerName">manufacturer_name of new product:</label><br>
             <input type="search" list="myList" id="manufacturerName" name="manufacturerName"><br>
