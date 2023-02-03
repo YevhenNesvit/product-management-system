@@ -60,8 +60,10 @@ public class ProductController {
 
             return new ModelAndView("products/productCreated");
         } else {
+            ModelAndView mav = new ModelAndView();
+            mav.addObject("manufacturerNotExists", "Manufacturer does not exist!");
 
-            return new ModelAndView("manufacturers/manufacturerNameNotExists");
+            return mav;
         }
     }
 
