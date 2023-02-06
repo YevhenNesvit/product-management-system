@@ -10,9 +10,9 @@
     <body>
     <div th:insert="navbar :: navbar">  </div>
         <form method="post" class="center" th:action="@{/manufacturers/deleteManufacturerForm}">
-            <label for="manufacturerName">Please, enter manufacturer_name to delete:</label><br>
+            <label>Please, enter manufacturer_name to delete:</label><br>
             <span class="confirm" th:text="${manufacturerDoesNotExists}">Manufacturer does not exists</span>
-            <input type="text" id="manufacturerName" name="manufacturerName" placeholder="Name"><br>
+            <input type="text" name="manufacturerName" placeholder="Name"><br>
             <button type="submit" class="but">Delete</button>
         </form>
     </body>

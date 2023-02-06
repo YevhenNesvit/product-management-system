@@ -75,14 +75,13 @@ public class ProductController {
         return mav;
     }
 
-    @RolesAllowed("ADMIN")
     @GetMapping("/deleteProductForm")
     public ModelAndView deleteProductForm() {
 
         return new ModelAndView("products/deleteProductForm");
     }
 
-    @PostMapping("/productDeleted")
+    @PostMapping("/deleteProductForm")
     public ModelAndView deleteManufacturer(@ModelAttribute("productName") String productName) {
 
         if (productService.IsProductNameExists(productName)) {
@@ -90,8 +89,10 @@ public class ProductController {
 
             return new ModelAndView("products/productDeleted");
         }
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("productDoesNotExists", "Product does not exist!");
 
-        return new ModelAndView("products/productNameNotExists");
+        return mav;
     }
 
     @RolesAllowed("ADMIN")
