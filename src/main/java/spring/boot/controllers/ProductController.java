@@ -14,9 +14,7 @@ import spring.boot.model.dto.ProductDto;
 import spring.boot.services.ManufacturerService;
 import spring.boot.services.ProductService;
 
-import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
-import java.math.BigDecimal;
 
 @AllArgsConstructor
 @Controller
@@ -95,22 +93,29 @@ public class ProductController {
         return mav;
     }
 
-    @RolesAllowed("ADMIN")
     @GetMapping("/updateProductForm")
     public ModelAndView updateProductForm() {
+        ModelAndView mav = new ModelAndView("products/updateProductForm");
+        mav.addObject("ProductDto", new ProductDto());
 
-        return new ModelAndView("products/updateProductForm");
+        return mav;
     }
 
-    @PostMapping("/productUpdated")
-    public ModelAndView updateProduct(@ModelAttribute("newName") String newName, @ModelAttribute("newPrice") BigDecimal newPrice,
-                                      @ModelAttribute("manufacturerName") String manufacturerName,
-                                      @ModelAttribute("oldName") String oldName, ManufacturerDto manufacturer) {
-        if (productService.IsProductNameExists(oldName)) {
+    @PostMapping("/updateProductForm")
+    public ModelAndView updateProduct(@ModelAttribute("ProductDto") @Valid ProductDto product, BindingResult bindingResult,
+                                      @ModelAttribute("oldName") String oldName, Model model, ManufacturerDto manufacturer,
+                                      @ModelAttribute("manufacturerName") String manufacturerName) {
+        if (bindingResult.hasErrors()) {
+
+            return new ModelAndView("products/updateProductForm");
+        } else if (productService.IsProductNameExists(oldName)) {
             if (manufacturerService.IsManufacturerNameExists(manufacturerName)) {
+                model.addAttribute("productDto", product);
                 manufacturer.setId(manufacturerService.getManufacturerIdByName(manufacturerName));
                 manufacturer.setName(manufacturerName);
-                productService.updateByName(newName, newPrice, manufacturer, oldName);
+                product.setId(productService.getProductIdByName(oldName));
+                product.setManufacturer(manufacturer);
+                productService.create(product);
 
                 return new ModelAndView("products/productUpdated");
             } else {

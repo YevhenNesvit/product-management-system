@@ -5,12 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring.boot.converter.ProductConverter;
 
-import spring.boot.model.dto.ManufacturerDto;
 import spring.boot.model.dto.ProductDto;
 import spring.boot.repositories.ProductRepository;
 
-import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 @AllArgsConstructor
 @Service
@@ -32,10 +31,6 @@ public class ProductService {
         repository.deleteByName(name);
     }
 
-    public void updateByName(String newName, BigDecimal newPrice, ManufacturerDto newManufacturer, String oldName) {
-        repository.updateByName(newName, newPrice, newManufacturer, oldName);
-    }
-
     public boolean IsProductNameExists(String name) {
         for (int i = 0; i < getProducts().size(); i++) {
             if (getProducts().get(i).getName().equals(name)) {
@@ -43,5 +38,16 @@ public class ProductService {
             }
         }
         return false;
+    }
+
+    public UUID getProductIdByName(String name) {
+        List<ProductDto> products = getProducts();
+        UUID id = null;
+        for (ProductDto product : products) {
+            if (product.getName().equals(name)) {
+                id = product.getId();
+            }
+        }
+        return id;
     }
 }
