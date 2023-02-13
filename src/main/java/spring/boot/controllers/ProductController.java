@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import spring.boot.converter.ManufacturerConverter;
 import spring.boot.model.dao.ManufacturerDao;
-import spring.boot.model.dto.ManufacturerDto;
 import spring.boot.model.dto.ProductDto;
 import spring.boot.services.ManufacturerService;
 import spring.boot.services.ProductService;
@@ -50,10 +49,12 @@ public class ProductController {
             return mav;
         } else if (manufacturerService.IsManufacturerNameExists(manufacturerName)) {
             model.addAttribute("ProductDto", product);
+
             manufacturer.setId(manufacturerService.getManufacturerIdByName(manufacturerName));
             manufacturer.setName(manufacturerName);
 
             product.setManufacturer(converter.from(manufacturer));
+
             productService.create(product);
 
             return new ModelAndView("products/productCreated");
@@ -103,7 +104,7 @@ public class ProductController {
 
     @PostMapping("/updateProductForm")
     public ModelAndView updateProduct(@ModelAttribute("ProductDto") @Valid ProductDto product, BindingResult bindingResult,
-                                      @ModelAttribute("oldName") String oldName, Model model, ManufacturerDto manufacturer,
+                                      @ModelAttribute("oldName") String oldName, Model model, ManufacturerDao manufacturer,
                                       @ModelAttribute("manufacturerName") String manufacturerName) {
         if (bindingResult.hasErrors()) {
 
@@ -111,10 +112,13 @@ public class ProductController {
         } else if (productService.IsProductNameExists(oldName)) {
             if (manufacturerService.IsManufacturerNameExists(manufacturerName)) {
                 model.addAttribute("productDto", product);
+
                 manufacturer.setId(manufacturerService.getManufacturerIdByName(manufacturerName));
                 manufacturer.setName(manufacturerName);
+
                 product.setId(productService.getProductIdByName(oldName));
-                product.setManufacturer(manufacturer);
+                product.setManufacturer(converter.from(manufacturer));
+
                 productService.create(product);
 
                 return new ModelAndView("products/productUpdated");
