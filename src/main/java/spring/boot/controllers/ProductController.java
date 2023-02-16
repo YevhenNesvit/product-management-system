@@ -123,8 +123,10 @@ public class ProductController {
 
                 return new ModelAndView("products/productUpdated");
             } else {
+                ModelAndView mav = new ModelAndView();
+                mav.addObject("manufacturerDoesNotExists", "Manufacturer does not exist!");
 
-                return new ModelAndView("manufacturers/manufacturerNameNotExists");
+                return mav;
             }
         } else {
 
