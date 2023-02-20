@@ -16,3 +16,5 @@ User roles:
 
 1. Admin - has the ability to perform all CRUD operations
 2. User - has read-only access
+
+Application is deployed on https://product-management-system.onrender.com/
