@@ -129,8 +129,10 @@ public class ProductController {
                 return mav;
             }
         } else {
+            ModelAndView mav = new ModelAndView();
+            mav.addObject("productDoesNotExists", "Product does not exist!");
 
-            return new ModelAndView("products/productNameNotExists");
+            return mav;
         }
     }
 }

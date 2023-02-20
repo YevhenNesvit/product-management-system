@@ -20,6 +20,7 @@
     <span class="confirm" th:text="${manufacturerDoesNotExists}">Manufacturer does not exists</span>
     <input type="text" name="manufacturerName" placeholder="Manufacturer"><br>
     <label for="oldName">old product_name to update:</label><br>
+    <span class="confirm" th:text="${productDoesNotExists}">Product does not exists</span>
     <input type="text" id="oldName" name="oldName"><br>
     <button type="submit" class="but">Update</button>
 </form>
