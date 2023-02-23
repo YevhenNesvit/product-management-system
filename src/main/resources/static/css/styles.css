@@ -60,13 +60,13 @@
      font-weight: bold;
      right: 31.5%;
 }
-            .confirm {
-                display: inline;
-                position: absolute;
-                color: red;
-                font-weight: bold;
-                right: 35%;
-            }
+.confirm {
+     display: inline;
+     position: absolute;
+     color: red;
+     font-weight: bold;
+     right: 35%;
+}
             .user {
                 display: inline;
                 position: absolute;

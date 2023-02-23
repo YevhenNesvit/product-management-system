@@ -21,7 +21,7 @@ public class ManufacturerController {
 
     @GetMapping("/createManufacturerForm")
     public ModelAndView createManufacturerForm() {
-        ModelAndView mav = new ModelAndView("manufacturers/createManufacturerForm");
+        ModelAndView mav = new ModelAndView();
         mav.addObject("ManufacturerDto", new ManufacturerDto());
 
         return mav;

@@ -20,10 +20,9 @@ public class RoleController {
     @Autowired
     private final RoleService roleService;
 
-    @RolesAllowed("ADMIN")
     @GetMapping("/createRoleForm")
     public ModelAndView createRoleForm() {
-        ModelAndView mav = new ModelAndView("roles/createRoleForm");
+        ModelAndView mav = new ModelAndView();
         mav.addObject("RoleDto", new RoleDto());
 
         return mav;
@@ -35,8 +34,10 @@ public class RoleController {
 
             return new ModelAndView("roles/createRoleForm");
         } else if (roleService.IsRoleNameExists(role.getName())) {
+            ModelAndView mav = new ModelAndView();
+            mav.addObject("roleExists", "Role already exists!");
 
-            return new ModelAndView("roles/roleNameAlreadyExists");
+            return mav;
         } else {
             model.addAttribute("RoleDto", role);
             roleService.create(role);
