@@ -46,23 +46,21 @@ public class RoleController {
         }
     }
 
-    @RolesAllowed("ADMIN")
     @GetMapping("/getRoles")
     public ModelAndView getRoles() {
-        ModelAndView mav = new ModelAndView("roles/getRoles");
+        ModelAndView mav = new ModelAndView();
         mav.addObject("roles", roleService.getRoles());
 
         return mav;
     }
 
-    @RolesAllowed("ADMIN")
     @GetMapping("/deleteRoleForm")
     public ModelAndView deleteRoleForm() {
 
         return new ModelAndView("roles/deleteRoleForm");
     }
 
-    @PostMapping("/roleDeleted")
+    @PostMapping("/deleteRoleForm")
     public ModelAndView deleteRole(@ModelAttribute("roleName") String roleName) {
 
         if (roleService.IsRoleNameExists(roleName)) {
@@ -70,8 +68,10 @@ public class RoleController {
 
             return new ModelAndView("roles/roleDeleted");
         }
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("roleDoesNotExists", "Role does not exist!");
 
-        return new ModelAndView("roles/roleNameNotExists");
+        return mav;
     }
 
     @RolesAllowed("ADMIN")
