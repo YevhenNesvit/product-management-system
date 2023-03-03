@@ -45,10 +45,8 @@
         </ul>
       </li>
       </th:block>
-      <li><a href="/logout">Logout</a></li>
     </ul>
-    <span style="float:right">
-       <p1 sec:authentication="name"></p1>
-    </span>
+    <a style="float:right" th:href="@{/logout}"><ul style="margin-top:17%">Logout</ul></a>
+    <a style="float:right;color:white"><ul style="margin-top:9.2%" sec:authentication="name"></ul></a>
   </div>
 </nav>
