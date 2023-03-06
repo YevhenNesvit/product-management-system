@@ -47,6 +47,6 @@
       </th:block>
     </ul>
     <a style="float:right" th:href="@{/logout}"><ul style="margin-top:17%">Logout</ul></a>
-    <a style="float:right;color:white"><ul style="margin-top:9.2%" sec:authentication="name"></ul></a>
+    <a style="float:right;color:white"><ul style="margin-top:14.6px" th:text="${userName}"></ul></a>
   </div>
 </nav>

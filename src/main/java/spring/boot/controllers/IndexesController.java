@@ -2,6 +2,8 @@ package spring.boot.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,11 +12,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import spring.boot.converter.RoleConverter;
 import spring.boot.model.dao.RoleDao;
+import spring.boot.model.dao.UserDao;
 import spring.boot.model.dto.UserDto;
+import spring.boot.repositories.UserRepository;
 import spring.boot.services.RoleService;
 import spring.boot.services.UserService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @AllArgsConstructor
 @Controller
@@ -28,6 +33,8 @@ public class IndexesController {
     private final PasswordEncoder passwordEncoder;
     @Autowired
     private final RoleConverter converter;
+    @Autowired
+    private final UserRepository repository;
 
     @GetMapping("")
     public ModelAndView getIndex() {
@@ -86,5 +93,20 @@ public class IndexesController {
 
             return mav;
         }
+    }
+
+    @ModelAttribute("userName")
+    public UserDao globalUserObject(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDao user = new UserDao();
+        List<UserDao> users = repository.findAll();
+        for (UserDao userDao : users) {
+            if (userDao.getEmail().equals(authentication.getName())) {
+                user = userDao;
+            }
+        }
+        model.addAttribute("userName", user.getFirstName() + " " + user.getLastName());
+
+        return user;
     }
 }
