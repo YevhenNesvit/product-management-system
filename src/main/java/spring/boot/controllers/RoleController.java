@@ -10,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 import spring.boot.model.dto.RoleDto;
 import spring.boot.services.RoleService;
 
-import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @AllArgsConstructor
@@ -74,7 +73,6 @@ public class RoleController {
         return mav;
     }
 
-    @RolesAllowed("ADMIN")
     @GetMapping("/updateRoleForm")
     public ModelAndView updateRoleForm() {
         ModelAndView mav = new ModelAndView("roles/updateRoleForm");
@@ -96,8 +94,10 @@ public class RoleController {
 
             return new ModelAndView("roles/roleUpdated");
         } else {
+            ModelAndView mav = new ModelAndView();
+            mav.addObject("roleDoesNotExists", "Role does not exist!");
 
-            return new ModelAndView("roles/roleNameNotExists");
+            return mav;
         }
     }
 }

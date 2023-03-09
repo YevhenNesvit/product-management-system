@@ -38,7 +38,7 @@ public class RoleDao {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     public Set<UserDao> getUsers() {
         return users;
     }
