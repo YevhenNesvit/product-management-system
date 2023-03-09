@@ -13,10 +13,10 @@
     <label>Please, enter new product_name:</label><br>
     <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
     <input type="text" th:field="*{name}" placeholder="Name"><br>
-    <label>Please, enter new price:</label><br>
+    <label>new price:</label><br>
     <span class="email" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</span>
     <input type="text" th:field="*{price}" placeholder="Price"><br>
-    <label>Please, enter name of new manufacturer:</label><br>
+    <label>name of manufacturer:</label><br>
     <span class="confirm" th:text="${manufacturerDoesNotExists}">Manufacturer does not exists</span>
     <input type="text" name="manufacturerName" placeholder="Manufacturer"><br>
     <label for="oldName">old product_name to update:</label><br>
