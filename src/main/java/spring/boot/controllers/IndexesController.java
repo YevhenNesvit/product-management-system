@@ -55,7 +55,7 @@ public class IndexesController {
 
     @GetMapping("/registration")
     public ModelAndView getRegistrationForm() {
-        ModelAndView mav = new ModelAndView("registration");
+        ModelAndView mav = new ModelAndView();
         mav.addObject("UserDto", new UserDto());
 
         return mav;

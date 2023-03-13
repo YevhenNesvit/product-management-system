@@ -28,7 +28,7 @@ public class ProductController {
 
     @GetMapping("/createProductForm")
     public ModelAndView createProductForm() {
-        ModelAndView mav = new ModelAndView("products/createProductForm");
+        ModelAndView mav = new ModelAndView();
         mav.addObject("manufacturers", manufacturerService.getManufacturers());
         mav.addObject("ProductDto", new ProductDto());
 
