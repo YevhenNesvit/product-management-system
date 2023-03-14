@@ -2,32 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Create user</title>
-    <style>
-            .center {
-                text-align: center;
-                margin-top: 11%;
-            }
-            .but {
-                margin-top: .2%;
-            }
-        </style>
 </head>
 <body>
 <div th:insert="navbar :: navbar">  </div>
-<form method="post" class="center" th:action="@{/users/userCreated}">
-    <label for="email"> Please, enter email of new user:</label><br>
-    <input type="text" id="email" name="email"><br>
-    <label for="password">password of new user:</label><br>
-    <input type="text" id="password" name="password"><br>
-    <label for="firstName">first_name of new user:</label><br>
-    <input type="text" id="firstName" name="firstName"><br>
-    <label for="lastName">last_name of new user:</label><br>
-    <input type="text" id="lastName" name="lastName"><br>
-    <label for="roleName">role of new user:</label><br>
-    <input type="text" id="roleName" name="roleName"><br>
+<form method="post" class="center" th:action="@{/users/createUserForm}" th:object="${UserDto}">
+    <label> Please, enter email of new user:</label><br>
+    <span class="email" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
+    <span class="user" th:text="${userExists}">User exists</span>
+    <input type="text" placeholder="Email" th:field="*{email}"><br>
+    <label>password of new user:</label><br>
+    <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
+    <input type="password" placeholder="Password" th:field="*{password}"><br>
+    <label>first_name of new user:</label><br>
+    <span class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name Error</span>
+    <input type="text" placeholder="First name" th:field="*{firstName}"><br>
+    <label>last_name of new user:</label><br>
+    <span class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name Error</span>
+    <input type="text" placeholder="Last name" th:field="*{lastName}"><br>
+    <label>role of new user:</label><br>
+    <span class="confirm" th:text="${roleNotExists}">Role does not exist</span>
+    <input type="text" name="roleName"><br>
     <button type="submit" class="but">Create</button>
 </form>
 </body>
