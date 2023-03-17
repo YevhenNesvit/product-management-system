@@ -69,23 +69,21 @@ public class UserController {
         }
     }
 
-    @RolesAllowed("ADMIN")
     @GetMapping("/getUsers")
     public ModelAndView getUsers() {
-        ModelAndView mav = new ModelAndView("users/getUsers");
+        ModelAndView mav = new ModelAndView();
         mav.addObject("users", userService.getUsers());
 
         return mav;
     }
 
-    @RolesAllowed("ADMIN")
     @GetMapping("/deleteUserForm")
     public ModelAndView deleteUserForm() {
 
         return new ModelAndView("users/deleteUserForm");
     }
 
-    @PostMapping("/userDeleted")
+    @PostMapping("/deleteUserForm")
     public ModelAndView deleteUser(@ModelAttribute("email") String email) {
 
         if (userService.IsUserEmailExists(email)) {
@@ -93,8 +91,10 @@ public class UserController {
 
             return new ModelAndView("users/userDeleted");
         }
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("userDoesNotExists", "User does not exist!");
 
-        return new ModelAndView("users/userEmailNotExists");
+        return mav;
     }
 
     @RolesAllowed("ADMIN")

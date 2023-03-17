@@ -68,7 +68,7 @@ public class ProductController {
 
     @GetMapping("/getProducts")
     public ModelAndView getManufacturers() {
-        ModelAndView mav = new ModelAndView("products/getProducts");
+        ModelAndView mav = new ModelAndView();
         mav.addObject("products", productService.getProducts());
 
         return mav;
@@ -96,7 +96,7 @@ public class ProductController {
 
     @GetMapping("/updateProductForm")
     public ModelAndView updateProductForm() {
-        ModelAndView mav = new ModelAndView("products/updateProductForm");
+        ModelAndView mav = new ModelAndView();
         mav.addObject("ProductDto", new ProductDto());
 
         return mav;

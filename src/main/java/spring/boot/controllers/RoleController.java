@@ -75,7 +75,7 @@ public class RoleController {
 
     @GetMapping("/updateRoleForm")
     public ModelAndView updateRoleForm() {
-        ModelAndView mav = new ModelAndView("roles/updateRoleForm");
+        ModelAndView mav = new ModelAndView();
         mav.addObject("RoleDto", new RoleDto());
 
         return mav;

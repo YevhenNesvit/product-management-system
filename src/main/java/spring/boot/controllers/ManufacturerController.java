@@ -48,7 +48,7 @@ public class ManufacturerController {
 
     @GetMapping("/getManufacturers")
     public ModelAndView getManufacturers() {
-        ModelAndView mav = new ModelAndView("manufacturers/getManufacturers");
+        ModelAndView mav = new ModelAndView();
         mav.addObject("manufacturers", manufacturerService.getManufacturers());
 
         return mav;
@@ -76,7 +76,7 @@ public class ManufacturerController {
 
     @GetMapping("/updateManufacturerForm")
     public ModelAndView updateManufacturerForm() {
-        ModelAndView mav = new ModelAndView("manufacturers/updateManufacturerForm");
+        ModelAndView mav = new ModelAndView();
         mav.addObject("ManufacturerDto", new ManufacturerDto());
 
         return mav;
