@@ -14,7 +14,6 @@ import spring.boot.model.dto.UserDto;
 import spring.boot.services.RoleService;
 import spring.boot.services.UserService;
 
-import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @AllArgsConstructor
@@ -97,32 +96,46 @@ public class UserController {
         return mav;
     }
 
-    @RolesAllowed("ADMIN")
     @GetMapping("/updateUserForm")
     public ModelAndView updateUserForm() {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("UserDto", new UserDto());
 
-        return new ModelAndView("users/updateUserForm");
+        return mav;
     }
 
-    @PostMapping("/userUpdated")
-    public ModelAndView updateProduct(@ModelAttribute("newEmail") String newEmail, @ModelAttribute("password") String password,
-                                      @ModelAttribute("firstName") String firstName, @ModelAttribute("lastName") String lastName,
-                                      @ModelAttribute("roleName") String roleName, @ModelAttribute("oldEmail") String oldEmail,
-                                      RoleDao role) {
-        if (userService.IsUserEmailExists(oldEmail)) {
+    @PostMapping("/updateUserForm")
+    public ModelAndView updateProduct(@ModelAttribute("UserDto") @Valid UserDto user, BindingResult bindingResult,
+                                      @ModelAttribute("oldEmail") String oldEmail, Model model, RoleDao role,
+                                      @ModelAttribute("roleName") String roleName) {
+        if (bindingResult.hasErrors()) {
+
+            return new ModelAndView("users/updateUserForm");
+        } else if (userService.IsUserEmailExists(oldEmail)) {
             if (roleService.IsRoleNameExists(roleName)) {
+                model.addAttribute("userDto", user);
+
                 role.setId(roleService.getRoleIdByName(roleName));
                 role.setName(roleName);
-                userService.updateByEmail(newEmail, password, firstName, lastName, role, oldEmail);
+
+                user.setId(userService.getUserIdByEmail(oldEmail));
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+                user.setRole(converter.from(role));
+
+                userService.create(user);
 
                 return new ModelAndView("users/userUpdated");
             } else {
+                ModelAndView mav = new ModelAndView();
+                mav.addObject("roleDoesNotExists", "Role does not exist!");
 
-                return new ModelAndView("roles/roleNameNotExists");
+                return mav;
             }
         } else {
+            ModelAndView mav = new ModelAndView();
+            mav.addObject("userDoesNotExists", "User does not exist!");
 
-            return new ModelAndView("users/userEmailNotExists");
+            return mav;
         }
     }
 }
