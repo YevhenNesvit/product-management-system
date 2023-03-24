@@ -2,32 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" th:href="@{/css/styles.css}">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <title>Manufacturers</title>
-        <style>
-            .center {
-                text-align: center;
-                margin-top: 11%;
-            }
-            table {
-                width: 380px;
-                border: 1px solid black;
-                margin: auto;
-                text-align: center;
-                border-collapse: collapse;
-            }
-            th {
-                text-align: center;
-            }
-        </style>
     </head>
     <body>
     <div th:insert="navbar :: navbar">  </div>
         <div class ="center">
           <h2>Manufacturers</h2>
             <table border="2">
-              <tr><th>manufacturer_id</th><th>manufacturer_name</th></tr>
+              <tr><th>Id</th><th>Name</th></tr>
                 <tr th:each="manufacturer: ${manufacturers}">
                   <td th:text="${manufacturer.id}"></td>
                   <td th:text="${manufacturer.name}"></td>
