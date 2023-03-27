@@ -1,6 +1,7 @@
-package spring.boot.model.dao;
+package spring.boot.role;
 
 import lombok.AllArgsConstructor;
+import spring.boot.user.UserDao;
 
 import javax.persistence.*;
 import java.util.Set;

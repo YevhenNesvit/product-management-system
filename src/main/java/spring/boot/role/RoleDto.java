@@ -1,6 +1,7 @@
-package spring.boot.model.dto;
+package spring.boot.role;
 
 import lombok.AllArgsConstructor;
+import spring.boot.user.UserDto;
 
 import javax.validation.constraints.NotBlank;
 import java.util.Set;

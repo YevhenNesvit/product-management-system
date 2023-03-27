@@ -1,6 +1,7 @@
-package spring.boot.model.dao;
+package spring.boot.manufacturer;
 
 import lombok.AllArgsConstructor;
+import spring.boot.product.ProductDao;
 
 import javax.persistence.*;
 import java.util.Set;

@@ -1,6 +1,7 @@
-package spring.boot.model.dto;
+package spring.boot.manufacturer;
 
 import lombok.AllArgsConstructor;
+import spring.boot.product.ProductDto;
 
 import javax.validation.constraints.NotBlank;
 import java.util.Set;

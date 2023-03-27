@@ -1,7 +1,8 @@
-package spring.boot.model.dao;
+package spring.boot.product;
 
 
 import lombok.AllArgsConstructor;
+import spring.boot.manufacturer.ManufacturerDao;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

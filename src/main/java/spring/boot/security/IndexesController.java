@@ -1,4 +1,4 @@
-package spring.boot.controllers;
+package spring.boot.security;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +10,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import spring.boot.converter.RoleConverter;
-import spring.boot.model.dao.RoleDao;
-import spring.boot.model.dao.UserDao;
-import spring.boot.model.dto.UserDto;
-import spring.boot.repositories.UserRepository;
-import spring.boot.services.RoleService;
-import spring.boot.services.UserService;
+import spring.boot.role.RoleDao;
+import spring.boot.user.UserDao;
+import spring.boot.user.UserDto;
+import spring.boot.user.UserRepository;
+import spring.boot.role.RoleService;
+import spring.boot.user.UserService;
 
 import javax.validation.Valid;
 import java.util.List;

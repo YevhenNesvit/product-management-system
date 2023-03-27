@@ -1,8 +1,8 @@
 package spring.boot.converter;
 
 import org.springframework.stereotype.Component;
-import spring.boot.model.dao.ManufacturerDao;
-import spring.boot.model.dto.ManufacturerDto;
+import spring.boot.manufacturer.ManufacturerDao;
+import spring.boot.manufacturer.ManufacturerDto;
 
 import java.util.ArrayList;
 import java.util.List;

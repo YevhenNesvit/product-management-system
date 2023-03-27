@@ -1,7 +1,8 @@
-package spring.boot.model.dto;
+package spring.boot.user;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+import spring.boot.role.RoleDto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

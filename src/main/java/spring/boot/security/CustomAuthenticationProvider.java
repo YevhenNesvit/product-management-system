@@ -12,8 +12,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import spring.boot.converter.UserConverter;
-import spring.boot.model.dto.UserDto;
-import spring.boot.repositories.UserRepository;
+import spring.boot.user.UserDto;
+import spring.boot.user.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;

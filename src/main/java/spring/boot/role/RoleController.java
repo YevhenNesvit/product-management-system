@@ -1,4 +1,4 @@
-package spring.boot.controllers;
+package spring.boot.role;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import spring.boot.model.dto.RoleDto;
-import spring.boot.services.RoleService;
 
 import javax.validation.Valid;
 

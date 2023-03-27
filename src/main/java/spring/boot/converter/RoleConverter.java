@@ -1,8 +1,8 @@
 package spring.boot.converter;
 
 import org.springframework.stereotype.Component;
-import spring.boot.model.dao.RoleDao;
-import spring.boot.model.dto.RoleDto;
+import spring.boot.role.RoleDao;
+import spring.boot.role.RoleDto;
 
 import java.util.ArrayList;
 import java.util.List;

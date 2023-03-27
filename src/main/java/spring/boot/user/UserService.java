@@ -1,11 +1,9 @@
-package spring.boot.services;
+package spring.boot.user;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring.boot.converter.UserConverter;
-import spring.boot.model.dto.UserDto;
-import spring.boot.repositories.UserRepository;
 
 import java.util.List;
 import java.util.UUID;

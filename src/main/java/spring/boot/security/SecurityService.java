@@ -1,4 +1,4 @@
-package spring.boot.services;
+package spring.boot.security;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import spring.boot.model.dto.UserDto;
+import spring.boot.user.UserDto;
 
 import java.util.ArrayList;
 import java.util.Collection;

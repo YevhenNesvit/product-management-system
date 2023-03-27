@@ -1,8 +1,8 @@
 package spring.boot.converter;
 
 import org.springframework.stereotype.Component;
-import spring.boot.model.dao.ProductDao;
-import spring.boot.model.dto.ProductDto;
+import spring.boot.product.ProductDao;
+import spring.boot.product.ProductDto;
 
 import java.util.ArrayList;
 import java.util.List;

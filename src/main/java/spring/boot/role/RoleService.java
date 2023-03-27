@@ -1,11 +1,9 @@
-package spring.boot.services;
+package spring.boot.role;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring.boot.converter.RoleConverter;
-import spring.boot.model.dto.RoleDto;
-import spring.boot.repositories.RoleRepository;
 
 import java.util.List;
 import java.util.UUID;
