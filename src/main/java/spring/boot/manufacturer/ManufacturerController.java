@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -27,7 +28,7 @@ public class ManufacturerController {
 
     @PostMapping("/createManufacturerForm")
     public ModelAndView createManufacturer(@ModelAttribute("ManufacturerDto") @Valid ManufacturerDto manufacturer,
-                                           BindingResult bindingResult, Model model) {
+                                           BindingResult bindingResult, Model model, RedirectAttributes redirect) {
         if (bindingResult.hasErrors()) {
 
             return new ModelAndView("manufacturers/createManufacturerForm");
@@ -37,10 +38,12 @@ public class ManufacturerController {
 
             return mav;
         } else {
+            ModelAndView mav = new ModelAndView("redirect:/manufacturers/getManufacturers");
+            redirect.addFlashAttribute("creation", "Manufacturer successfully created!");
             model.addAttribute("ManufacturerDto", manufacturer);
             manufacturerService.create(manufacturer);
 
-            return new ModelAndView("manufacturers/manufacturerCreated");
+            return mav;
         }
     }
 
