@@ -40,7 +40,9 @@ public class ManufacturerController {
         } else {
             ModelAndView mav = new ModelAndView("redirect:/manufacturers/getManufacturers");
             redirect.addFlashAttribute("creation", "Manufacturer successfully created!");
+
             model.addAttribute("ManufacturerDto", manufacturer);
+
             manufacturerService.create(manufacturer);
 
             return mav;
@@ -62,12 +64,15 @@ public class ManufacturerController {
     }
 
     @PostMapping("/deleteManufacturerForm")
-    public ModelAndView deleteManufacturer(@ModelAttribute("manufacturerName") String manufacturerName) {
+    public ModelAndView deleteManufacturer(@ModelAttribute("manufacturerName") String manufacturerName, RedirectAttributes redirect) {
 
         if (manufacturerService.IsManufacturerNameExists(manufacturerName)) {
+            ModelAndView mav = new ModelAndView("redirect:/manufacturers/getManufacturers");
+            redirect.addFlashAttribute("deletion", "Manufacturer successfully deleted!");
+
             manufacturerService.deleteByName(manufacturerName);
 
-            return new ModelAndView("manufacturers/manufacturerDeleted");
+            return mav;
         }
         ModelAndView mav = new ModelAndView();
         mav.addObject("manufacturerDoesNotExists", "Manufacturer does not exist!");

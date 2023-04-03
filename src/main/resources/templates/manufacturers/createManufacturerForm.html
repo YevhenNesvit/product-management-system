@@ -10,7 +10,7 @@
 <body>
 <div th:insert="navbar :: navbar">  </div>
 <form method="post" class="center" th:action="@{/manufacturers/createManufacturerForm}" th:object="${ManufacturerDto}">
-    <label> Please, enter manufacturer_name of new manufacturer:</label><br>
+    <label> Please, enter name of new manufacturer:</label><br>
     <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
     <span class="confirm" th:text="${manufacturerExists}">Manufacturer exists</span>
     <input type="text" th:field="*{name}" placeholder="Name"><br>
