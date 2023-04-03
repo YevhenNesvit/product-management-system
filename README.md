@@ -1,4 +1,4 @@
-# goit-java-dev-hw-8
+# Product management system
 
 Web application that allows to:
 
