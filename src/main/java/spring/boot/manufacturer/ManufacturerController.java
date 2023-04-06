@@ -90,16 +90,22 @@ public class ManufacturerController {
 
     @PostMapping("/updateManufacturerForm")
     public ModelAndView updateManufacturer(@ModelAttribute("ManufacturerDto") @Valid ManufacturerDto manufacturer,
-                                           BindingResult bindingResult, Model model, @ModelAttribute("oldName") String oldName) {
+                                           BindingResult bindingResult, Model model, @ModelAttribute("oldName") String oldName,
+                                           RedirectAttributes redirect) {
         if (bindingResult.hasErrors()) {
 
             return new ModelAndView("manufacturers/updateManufacturerForm");
         } else if (manufacturerService.IsManufacturerNameExists(oldName)) {
+            ModelAndView mav = new ModelAndView("redirect:/manufacturers/getManufacturers");
+            redirect.addFlashAttribute("update", "Manufacturer successfully updated!");
+
             model.addAttribute("ManufacturerDto", manufacturer);
+
             manufacturer.setId(manufacturerService.getManufacturerIdByName(oldName));
+
             manufacturerService.create(manufacturer);
 
-            return new ModelAndView("manufacturers/manufacturerUpdated");
+            return mav;
         } else {
             ModelAndView mav = new ModelAndView();
             mav.addObject("manufacturerDoesNotExists", "Manufacturer does not exist!");

@@ -1,8 +1,8 @@
-package spring.boot.converter;
+package spring.boot.user;
 
 import org.springframework.stereotype.Component;
-import spring.boot.user.UserDao;
-import spring.boot.user.UserDto;
+import spring.boot.converter.Converter;
+import spring.boot.role.RoleConverter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -11,7 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import spring.boot.converter.UserConverter;
+import spring.boot.user.UserConverter;
 import spring.boot.user.UserDto;
 import spring.boot.user.UserRepository;
 
