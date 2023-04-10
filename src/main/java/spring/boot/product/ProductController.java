@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import spring.boot.manufacturer.ManufacturerConverter;
 import spring.boot.manufacturer.ManufacturerDao;
 import spring.boot.manufacturer.ManufacturerService;
@@ -36,7 +37,7 @@ public class ProductController {
     @PostMapping("/createProductForm")
     public ModelAndView createProduct(@ModelAttribute("ProductDto") @Valid ProductDto product, BindingResult bindingResult,
                                       @ModelAttribute("manufacturerName") String manufacturerName, Model model,
-                                      ManufacturerDao manufacturer) {
+                                      ManufacturerDao manufacturer, RedirectAttributes redirect) {
         if (bindingResult.hasErrors()) {
 
             return new ModelAndView("products/createProductForm");
@@ -46,6 +47,9 @@ public class ProductController {
 
             return mav;
         } else if (manufacturerService.IsManufacturerNameExists(manufacturerName)) {
+            ModelAndView mav = new ModelAndView("redirect:/products/getProducts");
+            redirect.addFlashAttribute("creation", "Product successfully created!");
+
             model.addAttribute("ProductDto", product);
 
             manufacturer.setId(manufacturerService.getManufacturerIdByName(manufacturerName));
@@ -55,7 +59,7 @@ public class ProductController {
 
             productService.create(product);
 
-            return new ModelAndView("products/productCreated");
+            return mav;
         } else {
             ModelAndView mav = new ModelAndView();
             mav.addObject("manufacturerNotExists", "Manufacturer does not exist!");
