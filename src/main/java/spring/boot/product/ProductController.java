@@ -83,12 +83,15 @@ public class ProductController {
     }
 
     @PostMapping("/deleteProductForm")
-    public ModelAndView deleteManufacturer(@ModelAttribute("productName") String productName) {
+    public ModelAndView deleteManufacturer(@ModelAttribute("productName") String productName, RedirectAttributes redirect) {
 
         if (productService.IsProductNameExists(productName)) {
+            ModelAndView mav = new ModelAndView("redirect:/products/getProducts");
+            redirect.addFlashAttribute("deletion", "Product successfully deleted!");
+
             productService.deleteByName(productName);
 
-            return new ModelAndView("products/productDeleted");
+            return mav;
         }
         ModelAndView mav = new ModelAndView();
         mav.addObject("productDoesNotExists", "Product does not exist!");
