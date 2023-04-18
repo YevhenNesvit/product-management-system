@@ -102,6 +102,7 @@ public class ProductController {
     @GetMapping("/updateProductForm")
     public ModelAndView updateProductForm() {
         ModelAndView mav = new ModelAndView();
+        mav.addObject("manufacturers", manufacturerService.getManufacturers());
         mav.addObject("ProductDto", new ProductDto());
 
         return mav;
@@ -110,12 +111,15 @@ public class ProductController {
     @PostMapping("/updateProductForm")
     public ModelAndView updateProduct(@ModelAttribute("ProductDto") @Valid ProductDto product, BindingResult bindingResult,
                                       @ModelAttribute("oldName") String oldName, Model model, ManufacturerDao manufacturer,
-                                      @ModelAttribute("manufacturerName") String manufacturerName) {
+                                      @ModelAttribute("manufacturerName") String manufacturerName, RedirectAttributes redirect) {
         if (bindingResult.hasErrors()) {
 
             return new ModelAndView("products/updateProductForm");
         } else if (productService.IsProductNameExists(oldName)) {
             if (manufacturerService.IsManufacturerNameExists(manufacturerName)) {
+                ModelAndView mav = new ModelAndView("redirect:/products/getProducts");
+                redirect.addFlashAttribute("update", "Product successfully updated!");
+
                 model.addAttribute("productDto", product);
 
                 manufacturer.setId(manufacturerService.getManufacturerIdByName(manufacturerName));
@@ -126,7 +130,7 @@ public class ProductController {
 
                 productService.create(product);
 
-                return new ModelAndView("products/productUpdated");
+                return mav;
             } else {
                 ModelAndView mav = new ModelAndView();
                 mav.addObject("manufacturerDoesNotExists", "Manufacturer does not exist!");

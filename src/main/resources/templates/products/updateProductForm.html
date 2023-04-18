@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
@@ -10,7 +11,7 @@
 <body>
 <div th:insert="navbar :: navbar"></div>
 <form method="post" class="center" th:action="@{/products/updateProductForm}" th:object="${ProductDto}">
-    <label>Please, enter new product_name:</label><br>
+    <label>Please, enter new product name:</label><br>
     <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
     <input type="text" th:field="*{name}" placeholder="Name"><br>
     <label>new price:</label><br>
@@ -18,8 +19,11 @@
     <input type="text" th:field="*{price}" placeholder="Price"><br>
     <label>name of manufacturer:</label><br>
     <span class="confirm" th:text="${manufacturerDoesNotExists}">Manufacturer does not exists</span>
-    <input type="text" name="manufacturerName" placeholder="Manufacturer"><br>
-    <label>old product_name to update:</label><br>
+    <input type="search" list="myList" name="manufacturerName" placeholder="Manufacturer"><br>
+    <datalist id="myList">
+        <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer.name}" th:text="${manufacturer.name}"></option>
+    </datalist>
+    <label>old product name to update:</label><br>
     <span class="confirm" th:text="${productDoesNotExists}">Product does not exists</span>
     <input type="text" name="oldName" placeholder="Old name"><br>
     <button type="submit" class="but">Update</button>
