@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -26,7 +27,8 @@ public class RoleController {
     }
 
     @PostMapping("/createRoleForm")
-    public ModelAndView createRole(@ModelAttribute("RoleDto") @Valid RoleDto role, BindingResult bindingResult, Model model) {
+    public ModelAndView createRole(@ModelAttribute("RoleDto") @Valid RoleDto role, BindingResult bindingResult, Model model,
+                                   RedirectAttributes redirect) {
         if (bindingResult.hasErrors()) {
 
             return new ModelAndView("roles/createRoleForm");
@@ -36,10 +38,14 @@ public class RoleController {
 
             return mav;
         } else {
+            ModelAndView mav = new ModelAndView("redirect:/roles/getRoles");
+            redirect.addFlashAttribute("creation", "Role successfully created!");
+
             model.addAttribute("RoleDto", role);
+
             roleService.create(role);
 
-            return new ModelAndView("roles/roleCreated");
+            return mav;
         }
     }
 

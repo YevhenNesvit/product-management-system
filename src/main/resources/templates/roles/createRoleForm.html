@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
@@ -10,7 +11,7 @@
 <body>
 <div th:insert="navbar :: navbar">  </div>
 <form method="post" class="center" th:action="@{/roles/createRoleForm}" th:object="${RoleDto}">
-    <label> Please, enter role_name of new role:</label><br>
+    <label> Please, enter role name of new role:</label><br>
     <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
     <span class="error" th:text="${roleExists}">Role exists</span>
     <input type="text" th:field="*{name}" placeholder="Name"><br>
