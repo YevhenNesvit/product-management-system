@@ -12,10 +12,11 @@
 <div th:insert="navbar :: navbar">  </div>
 <div class ="center">
     <p class="success" th:text="${creation}">Role successfully created</p>
+    <p class="success" th:text="${deletion}">Role successfully deleted</p>
     <h2>Roles</h2>
     <table border="2">
         <tr><th>Id</th><th>Name</th></tr>
-        <tr th:each="role: ${roles}">
+        <tr th:each="role : ${roles}">
             <td th:text="${role.id}"></td>
             <td th:text="${role.name}"></td>
         </tr>

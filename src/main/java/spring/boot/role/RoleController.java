@@ -64,12 +64,15 @@ public class RoleController {
     }
 
     @PostMapping("/deleteRoleForm")
-    public ModelAndView deleteRole(@ModelAttribute("roleName") String roleName) {
+    public ModelAndView deleteRole(@ModelAttribute("roleName") String roleName, RedirectAttributes redirect) {
 
         if (roleService.IsRoleNameExists(roleName)) {
+            ModelAndView mav = new ModelAndView("redirect:/roles/getRoles");
+            redirect.addFlashAttribute("deletion", "Role successfully deleted!");
+
             roleService.deleteByName(roleName);
 
-            return new ModelAndView("roles/roleDeleted");
+            return mav;
         }
         ModelAndView mav = new ModelAndView();
         mav.addObject("roleDoesNotExists", "Role does not exist!");
