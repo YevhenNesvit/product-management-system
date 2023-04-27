@@ -90,16 +90,21 @@ public class RoleController {
 
     @PostMapping("/updateRoleForm")
     public ModelAndView updateRole(@ModelAttribute("RoleDto") @Valid RoleDto role, BindingResult bindingResult, Model model,
-                                   @ModelAttribute("oldName") String oldName) {
+                                   @ModelAttribute("oldName") String oldName, RedirectAttributes redirect) {
         if (bindingResult.hasErrors()) {
 
             return new ModelAndView("roles/updateRoleForm");
         } else if (roleService.IsRoleNameExists(oldName)) {
+            ModelAndView mav = new ModelAndView("redirect:/roles/getRoles");
+            redirect.addFlashAttribute("update", "Role successfully updated!");
+
             model.addAttribute("RoleDto", role);
+
             role.setId(roleService.getRoleIdByName(oldName));
+
             roleService.create(role);
 
-            return new ModelAndView("roles/roleUpdated");
+            return mav;
         } else {
             ModelAndView mav = new ModelAndView();
             mav.addObject("roleDoesNotExists", "Role does not exist!");
