@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
@@ -17,15 +18,18 @@
     <label>password of new user:</label><br>
     <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
     <input type="password" placeholder="Password" th:field="*{password}"><br>
-    <label>first_name of new user:</label><br>
+    <label>first name of new user:</label><br>
     <span class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name Error</span>
     <input type="text" placeholder="First name" th:field="*{firstName}"><br>
-    <label>last_name of new user:</label><br>
+    <label>last name of new user:</label><br>
     <span class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name Error</span>
     <input type="text" placeholder="Last name" th:field="*{lastName}"><br>
     <label>role of new user:</label><br>
     <span class="confirm" th:text="${roleNotExists}">Role does not exist</span>
-    <input type="text" name="roleName" placeholder="Role"><br>
+    <input type="search" list="myList" name="roleName" placeholder="Role"><br>
+    <datalist id="myList">
+        <option th:each="role : ${roles}" th:value="${role.name}" th:text="${role.name}"></option>
+    </datalist>
     <button type="submit" class="but">Create</button>
 </form>
 </body>

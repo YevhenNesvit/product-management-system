@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import spring.boot.role.RoleConverter;
 import spring.boot.role.RoleDao;
 import spring.boot.role.RoleService;
@@ -30,6 +31,7 @@ public class UserController {
     @GetMapping("/createUserForm")
     public ModelAndView createUserForm() {
         ModelAndView mav = new ModelAndView();
+        mav.addObject("roles", roleService.getRoles());
         mav.addObject("UserDto", new UserDto());
 
         return mav;
@@ -37,7 +39,8 @@ public class UserController {
 
     @PostMapping("/createUserForm")
     public ModelAndView createUser(@ModelAttribute("UserDto") @Valid UserDto user, BindingResult bindingResult,
-                                   @ModelAttribute("roleName") String roleName, Model model, RoleDao role) {
+                                   @ModelAttribute("roleName") String roleName, Model model, RoleDao role,
+                                   RedirectAttributes redirect) {
         if (bindingResult.hasErrors()) {
 
             return new ModelAndView("users/createUserForm");
@@ -47,6 +50,9 @@ public class UserController {
 
             return mav;
         } else if (roleService.IsRoleNameExists(roleName)) {
+            ModelAndView mav = new ModelAndView("redirect:/users/getUsers");
+            redirect.addFlashAttribute("creation", "User successfully created!");
+
             model.addAttribute("UserDto", user);
 
             role.setId(roleService.getRoleIdByName(roleName));
@@ -57,7 +63,7 @@ public class UserController {
 
             userService.create(user);
 
-            return new ModelAndView("users/userCreated");
+            return mav;
         } else {
             ModelAndView mav = new ModelAndView();
             mav.addObject("roleNotExists", "Role does not exist!");
