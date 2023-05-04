@@ -87,12 +87,15 @@ public class UserController {
     }
 
     @PostMapping("/deleteUserForm")
-    public ModelAndView deleteUser(@ModelAttribute("email") String email) {
+    public ModelAndView deleteUser(@ModelAttribute("email") String email, RedirectAttributes redirect) {
 
         if (userService.IsUserEmailExists(email)) {
+            ModelAndView mav = new ModelAndView("redirect:/users/getUsers");
+            redirect.addFlashAttribute("deletion", "User successfully deleted!");
+
             userService.deleteByEmail(email);
 
-            return new ModelAndView("users/userDeleted");
+            return mav;
         }
         ModelAndView mav = new ModelAndView();
         mav.addObject("userDoesNotExists", "User does not exist!");
