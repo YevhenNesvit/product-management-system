@@ -106,6 +106,7 @@ public class UserController {
     @GetMapping("/updateUserForm")
     public ModelAndView updateUserForm() {
         ModelAndView mav = new ModelAndView();
+        mav.addObject("roles", roleService.getRoles());
         mav.addObject("UserDto", new UserDto());
 
         return mav;
@@ -114,12 +115,15 @@ public class UserController {
     @PostMapping("/updateUserForm")
     public ModelAndView updateProduct(@ModelAttribute("UserDto") @Valid UserDto user, BindingResult bindingResult,
                                       @ModelAttribute("oldEmail") String oldEmail, Model model, RoleDao role,
-                                      @ModelAttribute("roleName") String roleName) {
+                                      @ModelAttribute("roleName") String roleName, RedirectAttributes redirect) {
         if (bindingResult.hasErrors()) {
 
             return new ModelAndView("users/updateUserForm");
         } else if (userService.IsUserEmailExists(oldEmail)) {
             if (roleService.IsRoleNameExists(roleName)) {
+                ModelAndView mav = new ModelAndView("redirect:/users/getUsers");
+                redirect.addFlashAttribute("update", "User successfully updated!");
+
                 model.addAttribute("userDto", user);
 
                 role.setId(roleService.getRoleIdByName(roleName));
@@ -131,7 +135,7 @@ public class UserController {
 
                 userService.create(user);
 
-                return new ModelAndView("users/userUpdated");
+                return mav;
             } else {
                 ModelAndView mav = new ModelAndView();
                 mav.addObject("roleDoesNotExists", "Role does not exist!");

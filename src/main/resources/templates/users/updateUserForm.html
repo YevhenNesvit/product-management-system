@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
@@ -16,15 +17,18 @@
     <label>new password:</label><br>
     <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
     <input type="text" th:field="*{password}" placeholder="Password"><br>
-    <label>new first_name:</label><br>
+    <label>new first name:</label><br>
     <span class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name Error</span>
     <input type="text" th:field="*{firstName}" placeholder="First name"><br>
-    <label>new last_name:</label><br>
+    <label>new last name:</label><br>
     <span class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name Error</span>
     <input type="text" th:field="*{lastName}" placeholder="Last name"><br>
     <label>new role:</label><br>
     <span class="confirm" th:text="${roleDoesNotExists}">Role does not exists</span>
-    <input type="text" name="roleName" placeholder="Role"><br>
+    <input type="search" list="myList" name="roleName" placeholder="Role"><br>
+    <datalist id="myList">
+        <option th:each="role : ${roles}" th:value="${role.name}" th:text="${role.name}"></option>
+    </datalist>
     <label>old email of user to update:</label><br>
     <span class="confirm" th:text="${userDoesNotExists}">User does not exists</span>
     <input type="text" name="oldEmail" placeholder="Old email"><br>
